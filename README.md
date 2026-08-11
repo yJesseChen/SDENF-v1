@@ -137,13 +137,7 @@ Each run is controlled by a config file. For cleaned result folders, `results/<e
 - `dim`: state dimension.
 - `dim_para`: dimension of the external parameter, control, or forcing input for nonautonomous examples.
 - `Delta`: time-step size used by the flow map.
-- `para`: fixed parameter vector for examples that store equation parameters directly in the config.
-- `mu`, `sigma`, `theta`: standard drift/diffusion parameters used by OU-type or related SDE examples.
-- `sigma_`, `sigma_1`, `sigma_2`, `sigma_3`: component-wise noise strengths used by multicomponent examples.
-- `alpha`, `gamma`, `lambda_`, `epsilon`: example-specific coefficients used by multiscale, oscillator, or reaction-network examples.
-- `p`, `q`, `V`, `f_`: example-specific physical or reaction parameters.
-- `omega`, `omega2`: frequency parameters for periodically forced or oscillatory examples.
-- `s1`, `s2`: noise/control scale parameters used by selected nonautonomous examples.
+- Model parameters: example-specific equation, physical, reaction, noise, control, or forcing parameters. These include fields such as `para`, `mu`, `sigma`, `theta`, `sigma_`, `sigma_1`, `sigma_2`, `sigma_3`, `alpha`, `gamma`, `lambda_`, `epsilon`, `p`, `q`, `V`, `f_`, `omega`, `omega2`, `s1`, and `s2`.
 - `resmodel`: deterministic/prior model used by ResNF or MixNF examples. Examples include `Exact` and `ChemicalODE`.
 - `resmodel_path`: path to the pretrained deterministic/prior model checkpoint when the run uses one.
 - `resconfig_path`: path to the config file for the deterministic/prior model when the run uses one.
