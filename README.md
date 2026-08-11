@@ -128,33 +128,126 @@ These examples correspond to [3] and [4].
 
 ### Config
 
-Each run is controlled by a config file. For cleaned result folders, `results/<example>/Test_config.json` is the record of the settings used for that trained model when the config is available.
+Each run is controlled by a config file. For cleaned result folders, `results/<example>/Test_config.json` records the settings used for that trained model. Not every example uses every parameter below; example-specific parameters are read only by the corresponding equation, model, or plotting routine.
 
-The main config sections follow the same pattern across model classes:
+`eqn_config`: equation, prior, and physical-model settings.
 
-`eqn_config`: equation or reaction-network settings.
-
-- `eqn_name`: example or equation name.
-- `dim`: dimension of the state variable when applicable.
-- `Delta`: time-step size when applicable.
-- Example-specific parameters: drift, diffusion, reaction-rate, control, or external-excitation parameters.
-- Prior/residual settings: for ResNF or MixNF examples, this may include the deterministic/residual prior model type and paths.
+- `_comment`: human-readable note for the example.
+- `eqn_name`: equation, SDE, SPDE, or SSA example name used by the evaluation and plotting code.
+- `dim`: state dimension.
+- `dim_para`: dimension of the external parameter, control, or forcing input for nonautonomous examples.
+- `Delta`: time-step size used by the flow map.
+- `para`: fixed parameter vector for examples that store equation parameters directly in the config.
+- `mu`, `sigma`, `theta`: standard drift/diffusion parameters used by OU-type or related SDE examples.
+- `sigma_`, `sigma_1`, `sigma_2`, `sigma_3`: component-wise noise strengths used by multicomponent examples.
+- `alpha`, `gamma`, `lambda_`, `epsilon`: example-specific coefficients used by multiscale, oscillator, or reaction-network examples.
+- `p`, `q`, `V`, `f_`: example-specific physical or reaction parameters.
+- `omega`, `omega2`: frequency parameters for periodically forced or oscillatory examples.
+- `s1`, `s2`: noise/control scale parameters used by selected nonautonomous examples.
+- `resmodel`: deterministic/prior model used by ResNF or MixNF examples. Examples include `Exact` and `ChemicalODE`.
+- `resmodel_path`: path to the pretrained deterministic/prior model checkpoint when the run uses one.
+- `resconfig_path`: path to the config file for the deterministic/prior model when the run uses one.
 
 `net_config`: normalizing-flow architecture and training settings.
 
-- `fname`: flow architecture. The provided examples mainly use masked autoregressive flows (`MAF`).
-- Hidden-layer, node, optimizer, learning-rate, batch-size, and epoch settings.
-- Model-specific settings for NF, ResNF, MixNF, conservative variants, and nonautonomous variants.
+- `fname`: flow architecture name. The provided examples mainly use masked autoregressive flow, `MAF`.
+- `flevel`: number of flow blocks or flow levels.
+- `net_spec`: neural-network specification for the flow transform.
+  - `nodes`: number of nodes per hidden layer.
+  - `layer`: number of hidden layers.
+  - `act`: activation function.
+- `N_rec`: number of consecutive transition steps used by the model during training or prediction. In the included configs this is typically `2`.
+- `batch_size`: training batch size.
+- `N_epochs`: number of training epochs.
+- `weight_decay`: weight-decay coefficient used by the optimizer.
+- `Test_mode`: prediction/testing mode used during or after training. The included configs commonly use `Normal`.
+- `Note`: optional human-readable training note.
+- `l_rate`: legacy scalar learning-rate field.
+- `l_rate_config`: active learning-rate configuration selected for the run.
+- `l_rate_config_value`: fixed learning-rate option.
+  - `name`: scheduler name, usually `value`.
+- `l_rate_config_step`: step-decay learning-rate option.
+  - `name`: scheduler name.
+  - `step`: decay step interval.
+  - `gamma`: multiplicative decay factor.
+- `l_rate_config_cyclic`: cyclic learning-rate option.
+  - `name`: scheduler name.
+  - `base`: lower learning-rate bound.
+  - `max`: upper learning-rate bound.
+  - `step`: cycle step length.
+  - `gamma`: decay factor for cycle amplitude when used.
+- `l_rate_config_Stepcyclic`: step-cyclic learning-rate option.
+  - `name`: scheduler name.
+  - `base`, `max`, `step`, `gamma`: cyclic scheduler parameters.
+  - `scale`: additional scaling factor.
+  - `gstep`: global step interval for scaling.
+- `l_rate_config_ROnPlat`: reduce-on-plateau learning-rate option.
+  - `name`: scheduler name.
+  - `minr`: minimum learning rate.
+  - `factor`: reduction factor.
+  - `patience`: patience before reducing the learning rate.
 
-`dat_config`: data paths and sampling settings.
+`dat_config`: data paths, prediction size, and sampling settings.
 
 - `TrainData_dir`: path to the training `.mat` file.
 - `TestData_dir`: path to the test `.mat` file.
-- Additional data paths for conditional SSA data, nonautonomous parameters, or production tests when used.
+- `n_ea_traj`: number of sampled training windows or trajectory segments per trajectory.
+- `N_pred`: number of prediction trajectories used by the standard prediction routines.
+- `Test_mode`: testing data mode. The included configs commonly use `Normal`.
+- `pair_data`: whether the training data are stored as paired input/output transitions.
+- `DiscretePred`: whether prediction is treated as a discrete-step prediction problem.
+- `ConstrainedPred`: whether prediction uses conservation or feasibility constraints.
+- `N_train_base`: base number of training samples used by selected runner-generated configs.
 
-`show_config` and `monitor_config`: postprocessing and monitoring settings.
+`show_config`: standard postprocessing switches.
 
-- These sections control sample plots, mean/std plots, density plots, loss plots, and ensemble/best-model monitoring when enabled.
+- `plot_samplecompare`: whether to generate sample trajectory comparison plots.
+- `plot_meancompare`: whether to generate mean/std comparison plots.
+- `plot_losthist`: whether to generate loss-history plots.
+
+`monitor_config`: training-time and validation-time diagnostics.
+
+- `traindata_hist`: whether to plot training-data histograms.
+- `traintransin_hist`: whether to plot transition-input histograms.
+- `repdf_display`: repeated density/PDF display settings.
+  - `if`: enable or disable the monitor.
+  - `size`: number of samples used for the display when present.
+  - `range`: plotting range.
+  - `times`: training epochs or iterations at which to plot.
+  - `int_long`: integration/prediction length for the display when present.
+  - `path`: output or reference path for selected SSA displays.
+- `cond_mv`: conditional mean/variance monitor.
+  - `if`: enable or disable the monitor.
+  - `Npoint`: number of conditioning points.
+  - `range`: conditioning range.
+  - `times`: epochs or iterations at which to evaluate.
+- `Evameanv`: recursive prediction and mean/std evaluation monitor.
+  - `if`: enable or disable the monitor.
+  - `times`: epochs or iterations at which to evaluate.
+  - `type`: evaluation type, usually `Normal`.
+  - `sample`: optional sample count for selected examples.
+- `loss`: loss plotting monitor.
+  - `if`: enable or disable the monitor.
+  - `times`: epochs or iterations at which to save the loss plot.
+- `Ens_monitor`: ensemble-checkpoint monitor.
+  - `if`: enable or disable ensemble checkpointing.
+  - `Ens_repdf`: ensemble density/PDF diagnostics.
+  - `Ens_cond_mv`: ensemble conditional mean/variance diagnostics.
+  - `Ens_eva`: ensemble mean/std evaluation diagnostics.
+- `Best_monitor`: best-model checkpoint monitor.
+  - `if`: enable or disable best-model monitoring.
+  - `Best_repdf`: density/PDF diagnostics for the best model.
+  - `Best_cond_mv`: conditional mean/variance diagnostics for the best model.
+  - `Best_eva`: mean/std evaluation diagnostics for the best model.
+  - `sample`: optional sample count for selected examples.
+- `stoppingtime`: stopping-time diagnostics for selected SSA examples.
+  - `if`: enable or disable stopping-time evaluation.
+  - `path`: output or reference path.
+
+Other top-level metadata fields may appear in runner-generated configs:
+
+- `runner_note`: note added by a training or rerun script.
+- `run_metadata`: bookkeeping information such as `base_config`, `train_data`, `test_data`, `boundary_train_data`, `n_ea_traj`, and a runner note. These fields document how a rerun was constructed and are not usually model hyperparameters.
 
 ### Data Format
 
