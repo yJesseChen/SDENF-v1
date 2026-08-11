@@ -174,8 +174,8 @@ Each run is controlled by a config file. For cleaned result folders, `results/<e
 - Training sample construction: controlled by `pair_data`, `n_ea_traj`, and `N_train_base`.
   - If `pair_data` is absent or `false`, the code treats `data` as long trajectories with shape `[dim, number_of_time_steps, number_of_trajectories]`. It randomly samples `n_ea_traj` short windows from each long trajectory, so the effective training size is `number_of_trajectories * n_ea_traj`.
   - If `pair_data` is `true`, the code treats `data` as precomputed input/output transition pairs. For the usual `N_rec = 2` case, the expected shape is `[dim, 2, number_of_pairs]`, where `data[:, 0, :]` stores inputs and `data[:, 1, :]` stores outputs.
-  - In pair-data mode, `N_train_base` is the number of base transition pairs used for each repeat, and the effective training size is `N_train_base * n_ea_traj`.
-  - For example, `N_train_base = 10000` and `n_ea_traj = 12` gives `120000` training pairs. The pair-data file should contain at least `120000` available pairs.
+    - In pair-data mode, `N_train_base` is the number of base transition pairs used for each repeat, and the effective training size is `N_train_base * n_ea_traj`.
+    - For example, `N_train_base = 10000` and `n_ea_traj = 12` gives `120000` training pairs. The pair-data file should contain at least `120000` available pairs.
 - `N_pred`: number of prediction trajectories used by the standard prediction routines.
 - `Test_mode`: testing data mode. The included configs commonly use `Normal`.
 - `DiscretePred`: whether prediction is treated as a discrete-step prediction problem.
