@@ -4,7 +4,7 @@ This repository contains normalizing-flow implementations for stochastic flow ma
 
 - **NF**: a direct normalizing-flow model for stochastic flow-map transitions, $x_{n+1} = G_\theta(x_n, z)$.
 - **ResNF**: a residual normalizing-flow model, $x_{n+1} = x_n + G_\theta(x_n, z)$.
-- **MixNF**: a mixed normalizing-flow model, $x_{n+1} = \Phi(x_n) + G_\theta(x_n, z)$. In the SSA examples from the second SSA paper, $\Phi$ is an ODE or chemical-dynamics prior, and the normalizing flow learns the remaining stochastic component around that prior.
+- **MixNF**: a mixed normalizing-flow model, $x_{n+1} = \Phi(x_n) + G_\theta(x_n, z)$. In the SSA examples, $\Phi$ is an ODE or chemical-dynamics prior, and the normalizing flow learns the remaining stochastic component around that prior.
 
 The examples in this repository apply these models to three settings:
 
@@ -23,7 +23,6 @@ The included examples are associated with the following papers:
 - [2] Yuan Chen and Dongbin Xiu, `Data-Driven Effective Modeling of Multiscale Stochastic Dynamical Systems`, 2024.
   https://iamyuanchen.xyz/pdf/2024ChenXiu_b.pdf
 - [3] Yuan Chen, Weize Mao, and Dongbin Xiu, `Data-Driven Effective Modeling of Stochastic Chemical Reaction Networks`, to be published soon.
-- [4] Yuan Chen, Markos A. Katsoulakis, and Dongbin Xiu, `Chemistry-Informed Generative Modeling for Complex Stochastic Reaction Networks`, to be published soon.
 
 ## Requirements
 
@@ -117,7 +116,7 @@ These examples correspond to [2].
 
 ### SSA / Chemical Reaction Networks
 
-These examples correspond to [3] and [4].
+These examples correspond to [3].
 
 | Paper | Example | Result folder | Description | Model type |
 | --- | --- | --- | --- | --- |
@@ -127,10 +126,10 @@ These examples correspond to [3] and [4].
 | [3] | Ex25 | `results/Ex25` | Brusselator | NF |
 | [3] | Ex27 | `results/Ex27` | Autocatalysis | Conservative ResNF |
 | [3] | Ex26 | `results/Ex26` | Oregonator | ResNF |
-| [4] | Ex45 | `results/Ex45` | Schlogl model | MixNF |
-| [4] | Ex42 | `results/Ex42` | Vilar 2002 genetic oscillator model | Conservative MixNF |
-| [4] | Ex41 | `results/Ex41` | Mammalian circadian clock model | MixNF |
-| [4] | Ex23 Mix | `results/Ex23_Mix` | Lotka-Volterra SSA model with mixed prior | MixNF |
+| [3] | Ex45 | `results/Ex45` | Schlogl model | MixNF |
+| [3] | Ex42 | `results/Ex42` | Vilar 2002 genetic oscillator model | Conservative MixNF |
+| [3] | Ex41 | `results/Ex41` | Mammalian circadian clock model | MixNF |
+| [3] | Ex23 Mix | `results/Ex23_Mix` | Lotka-Volterra SSA model with mixed prior | MixNF |
 
 ## Preparation
 
