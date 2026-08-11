@@ -1,0 +1,52 @@
+{
+  "eqn_config": {
+    "_comment": "Ex4 of SDE Exp Diffusion",
+    "eqn_name": "Exp_diffusion",
+    "dim": 1,
+    "Delta": 0.01,
+    "mu": 5,
+    "sigma":0.5
+  },
+  "net_config": {
+    "N_rec": 2,
+    "fname": "MAF",
+    "flevel": 5,
+    "net_spec": {"nodes":32,"layer":3,"act":"tanh"},
+    "weight_decay": 0.0,
+    "l_rate": 0.0001,
+    "l_rate_config_value":{"name":"value"},
+    "l_rate_config_step":{"name": "Step","step": 2000,"gamma": 0.99999},
+    "l_rate_config_cyclic":{"name":"Cyclic","base":0.0001,"max":0.0005,"step":100,"gamma":0.99},
+    "l_rate_config_Stepcyclic":{"name":"StepCyclic","base":0.0001,"max":0.0005,"step":100,"gamma":0.99,"scale":0.5,"gstep":10000},
+    "l_rate_config_ROnPlat":{"name":"ReduceOnPlateau","minr":0.00001,"factor":0.5,"patience":100},
+    "l_rate_config": {
+      "name": "StepCyclic",
+      "base": 0.0001,
+      "max": 0.0003,
+      "step": 10000,
+      "gamma": 0.99999,
+      "scale": 0.5,
+      "gstep": 40000
+    },
+    "batch_size": 20000,
+    "N_epochs": 10000,
+    "Test_mode": "Normal"
+  },
+  "dat_config": {
+    "TrainData_dir": "./data/Ex4ExpDiff/Ex4ExpDiff_train.mat",
+    "TestData_dir": "./data/Ex4ExpDiff/Ex4ExpDiff_test.mat",
+    "n_ea_traj": 4,
+    "N_pred": 5000,
+    "Test_mode": "Normal"
+  },
+  "monitor_config": {
+    "repdf_display": {"if":true, "size":[8,8], "range":[-0.65,0.65], "times":20, "int_long":0.5},
+    "traindata_hist": true,
+    "traintransin_hist":true,
+    "cond_mv": {"if":true, "Npoint":120, "range":[-0.65,0.65], "times":20},
+    "Evameanv": {"if":true, "times":10, "type":"Normal"},
+    "loss": {"if":true, "times":10},
+    "Ens_monitor": {"if": false, "Ens_repdf": true, "Ens_cond_mv": true, "Ens_eva": true},
+    "Best_monitor": {"if": false, "Best_repdf": false, "Best_cond_mv": false, "Best_eva": true}
+  }
+}

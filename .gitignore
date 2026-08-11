@@ -1,0 +1,29 @@
+# Ignore all data files and folders
+/data/*
+!/data/
+!/data/.gitkeep
+
+# Ignore all pretrainmodel contents but keep the directory itself
+/pretrainmodel/*
+!/pretrainmodel/
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# OS files
+.DS_Store
+Thumbs.db
+# Notebook and local editor files
+.ipynb_checkpoints/
+.vscode/
+# Local scratch outputs
+error.mat
+results/Ex4Expdiff_tutorial/

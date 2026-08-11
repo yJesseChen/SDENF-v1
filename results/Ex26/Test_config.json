@@ -1,0 +1,125 @@
+{
+  "eqn_config": {
+    "_comment": "Ex26SSAOregonator",
+    "eqn_name": "SSAOregonator",
+    "dim": 3,
+    "Delta": 0.01
+  },
+  "net_config": {
+    "N_rec": 2,
+    "fname": "MAF",
+    "flevel": 3,
+    "net_spec": {
+      "nodes": 20,
+      "layer": 3,
+      "act": "tanh"
+    },
+    "weight_decay": 0.01,
+    "l_rate": 0.0001,
+    "l_rate_config_value": {
+      "name": "value"
+    },
+    "l_rate_config_step": {
+      "name": "Step",
+      "step": 2000,
+      "gamma": 0.99999
+    },
+    "l_rate_config_cyclic": {
+      "name": "Cyclic",
+      "base": 0.0001,
+      "max": 0.0005,
+      "step": 100,
+      "gamma": 0.99
+    },
+    "l_rate_config_Stepcyclic": {
+      "name": "StepCyclic",
+      "base": 0.0001,
+      "max": 0.0005,
+      "step": 100,
+      "gamma": 0.99,
+      "scale": 0.5,
+      "gstep": 10000
+    },
+    "l_rate_config_ROnPlat": {
+      "name": "ReduceOnPlateau",
+      "minr": 1e-05,
+      "factor": 0.5,
+      "patience": 100
+    },
+    "l_rate_config": {
+      "name": "StepCyclic",
+      "base": 0.0001,
+      "max": 0.0003,
+      "step": 10000,
+      "gamma": 0.99999,
+      "scale": 0.5,
+      "gstep": 40000
+    },
+    "batch_size": 40000,
+    "N_epochs": 400000,
+    "Test_mode": "Normal"
+  },
+  "dat_config": {
+    "TrainData_dir": "./data/Ex26SSAOregonator/Ex26SSAOregonator_Set1_T001_train_wBD3.mat",
+    "TestData_dir": "./data/Ex26SSAOregonator/Ex26SSAOregonator_new_test_10000volume.mat",
+    "n_ea_traj": 12,
+    "pair_data": true,
+    "N_train_base": 10000,
+    "DiscretePred": true,
+    "N_pred": 200
+  },
+  "monitor_config": {
+    "repdf_display": {
+      "if": true,
+      "times": 20,
+      "path": "./data/Ex26SSAOregonator/Ex26SSAOregonator_Set1_dt001_cond.mat"
+    },
+    "traindata_hist": true,
+    "traintransin_hist": true,
+    "cond_mv": {
+      "if": false,
+      "Npoint": 50,
+      "range": [
+        [
+          -2.0,
+          2.0
+        ],
+        [
+          -1.0,
+          1.0
+        ]
+      ],
+      "times": 20
+    },
+    "Evameanv": {
+      "if": true,
+      "times": 20,
+      "type": "Normal",
+      "sample": true
+    },
+    "loss": {
+      "if": true,
+      "times": 20
+    },
+    "Ens_monitor": {
+      "if": false,
+      "Ens_repdf": true,
+      "Ens_cond_mv": true,
+      "Ens_eva": true
+    },
+    "Best_monitor": {
+      "if": false,
+      "Best_repdf": false,
+      "Best_eva": false
+    }
+  },
+  "runner_note": "Fixed rerun of 400000-epoch ResNFSDE Oregonator. Based on paper Test_config, with missing monitor_config.Best_monitor added for current code compatibility.",
+  "run_metadata": {
+    "runner_note": "Oregonator ResNFSDE rerun with wBD3 T=0.01 training data and dat_config.n_ea_traj=12, giving 120000 effective training pairs when N_train_base=10000.",
+    "base_config": "/home/chen.11050/SdeNF_runs/TrainBrusselatorRes50000/SdeNF/AICoding/training_configs/Ex26_ResNFSDE_oregonator_400000ep_wBD3train_T001_repeat1_runner.json",
+    "boundary_train_data": "./data/Ex26SSAOregonator/Ex26SSAOregonator_Set1_T001_train_wBD3.mat",
+    "test_data": "./data/Ex26SSAOregonator/Ex26SSAOregonator_new_test_10000volume.mat",
+    "train_data": "./data/Ex26SSAOregonator/Ex26SSAOregonator_Set1_T001_train_wBD3.mat",
+    "n_ea_traj": 12
+  }
+}

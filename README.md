@@ -12,6 +12,8 @@ The examples in this repository apply these models to three settings:
 - Markovian effective dynamics of multiscale SDEs;
 - stochastic simulation algorithm models for chemical reaction networks.
 
+A step-by-step tutorial for the Ex4 exponential-diffusion example is provided in [`tutorials/Ex4_tutorial.ipynb`](tutorials/Ex4_tutorial.ipynb). The tutorial walks through the task setup, data loading and plotting, config inspection, training, model outputs, prediction, and postprocessing.
+
 ## References
 
 The included examples are associated with the following papers:
@@ -37,6 +39,12 @@ The code was developed with Python and PyTorch. A working environment should inc
 - absl-py
 - tqdm
 
+A detailed record of the local `DeepLearningTest` conda environment is included in [`environment-deeplearningtest.yml`](environment-deeplearningtest.yml). To recreate a similar environment, use:
+
+```bash
+conda env create -f environment-deeplearningtest.yml
+```
+
 ## Repository Structure
 
 The main folders are:
@@ -44,7 +52,7 @@ The main folders are:
 | Folder | Contents |
 | --- | --- |
 | `config/` | Example JSON configs. The current cleaned copy keeps a small representative config for the autonomous SDE example. |
-| `data/` | MATLAB `.mat` datasets. The current cleaned copy includes selected small data files for the Ex4 autonomous SDE example. |
+| `data/` | Local/generated MATLAB `.mat` datasets. For the Ex4 tutorial, generate data with `SDEDATA-v1/Ex4ExpDiff.py` and place the files under `data/Ex4ExpDiff/`. Data files are not included by default. |
 | `results/` | Cleaned result folders for the included paper examples. Each folder keeps config and trained weights only. |
 | `src/` | Supporting source files used by the flow models. |
 

@@ -1,0 +1,121 @@
+{
+  "eqn_config": {
+    "_comment": "Ex16 of SDE Multiscale modeling",
+    "eqn_name": "Ex16Multiscale",
+    "dim": 2,
+    "dim_para": 3,
+    "Delta": 0.01,
+    "s1": 0.2,
+    "s2": 0.05,
+    "resmodel_path": "./pretrainmodel/Ex1GeoBrownianm2s1/Best_model/checkpoint",
+    "resconfig_path": "./pretrainmodel/Ex1GeoBrownianm2s1/Test_config.json",
+    "resmodel": "Exact"
+  },
+  "net_config": {
+    "N_rec": 2,
+    "fname": "MAF",
+    "flevel": 3,
+    "net_spec": {
+      "nodes": 20,
+      "layer": 3,
+      "act": "tanh"
+    },
+    "weight_decay": 0.01,
+    "l_rate": 0.01,
+    "l_rate_config_value": {
+      "name": "value"
+    },
+    "l_rate_config_step": {
+      "name": "Step",
+      "step": 2000,
+      "gamma": 0.99999
+    },
+    "l_rate_config_cyclic": {
+      "name": "Cyclic",
+      "base": 0.0001,
+      "max": 0.0005,
+      "step": 100,
+      "gamma": 0.99
+    },
+    "l_rate_config_Stepcyclic": {
+      "name": "StepCyclic",
+      "base": 0.0001,
+      "max": 0.0005,
+      "step": 100,
+      "gamma": 0.99,
+      "scale": 0.5,
+      "gstep": 10000
+    },
+    "l_rate_config_ROnPlat": {
+      "name": "ReduceOnPlateau",
+      "minr": 1e-05,
+      "factor": 0.5,
+      "patience": 100
+    },
+    "l_rate_config": {
+      "name": "StepCyclic",
+      "base": 0.0005,
+      "max": 0.001,
+      "step": 5000,
+      "gamma": 0.99999,
+      "scale": 0.5,
+      "gstep": 20000
+    },
+    "batch_size": 40000,
+    "N_epochs": 300000,
+    "Test_mode": "Normal",
+    "Note": "regular network + regular batch size + SCyc lr + higher initial "
+  },
+  "dat_config": {
+    "TrainData_dir": "./data/Ex16Multiscale/Ex16Multiscale_train.mat",
+    "TestData_dir": "./data/Ex16Multiscale/Ex16Multiscale_test.mat",
+    "n_ea_traj": 12,
+    "N_pred": 10000
+  },
+  "show_config": {
+    "plot_samplecompare": true,
+    "plot_meancompare": true,
+    "plot_losthist": true
+  },
+  "monitor_config": {
+    "repdf_display": {
+      "if": false,
+      "size": [
+        8,
+        8
+      ],
+      "range": [
+        0.5,
+        2
+      ],
+      "times": 20,
+      "int_long": 0.5
+    },
+    "traindata_hist": true,
+    "traintransin_hist": true,
+    "cond_mv": {
+      "if": false,
+      "Npoint": 80,
+      "range": [
+        0.5,
+        2
+      ],
+      "times": 20
+    },
+    "Evameanv": {
+      "if": false,
+      "times": 10,
+      "type": "Normal"
+    },
+    "loss": {
+      "if": true,
+      "times": 10
+    },
+    "Ens_monitor": {
+      "if": false,
+      "Ens_repdf": false,
+      "Ens_cond_mv": false,
+      "Ens_eva": false
+    }
+  }
+}

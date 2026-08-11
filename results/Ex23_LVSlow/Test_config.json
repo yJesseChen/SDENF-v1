@@ -1,0 +1,111 @@
+{
+  "eqn_config": {
+    "_comment": "Ex23 of SSALV",
+    "eqn_name": "SSALV",
+    "dim": 2,
+    "Delta": 0.1
+  },
+  "net_config": {
+    "N_rec": 2,
+    "fname": "MAF",
+    "flevel": 3,
+    "net_spec": {
+      "nodes": 20,
+      "layer": 3,
+      "act": "tanh"
+    },
+    "weight_decay": 0.01,
+    "l_rate": 0.0001,
+    "l_rate_config_value": {
+      "name": "value"
+    },
+    "l_rate_config_step": {
+      "name": "Step",
+      "step": 2000,
+      "gamma": 0.99999
+    },
+    "l_rate_config_cyclic": {
+      "name": "Cyclic",
+      "base": 0.0001,
+      "max": 0.0005,
+      "step": 100,
+      "gamma": 0.99
+    },
+    "l_rate_config_Stepcyclic": {
+      "name": "StepCyclic",
+      "base": 0.0001,
+      "max": 0.0005,
+      "step": 100,
+      "gamma": 0.99,
+      "scale": 0.5,
+      "gstep": 10000
+    },
+    "l_rate_config_ROnPlat": {
+      "name": "ReduceOnPlateau",
+      "minr": 1e-05,
+      "factor": 0.5,
+      "patience": 100
+    },
+    "l_rate_config": {
+      "name": "StepCyclic",
+      "base": 0.0001,
+      "max": 0.0003,
+      "step": 10000,
+      "gamma": 0.99999,
+      "scale": 0.5,
+      "gstep": 40000
+    },
+    "batch_size": 40000,
+    "N_epochs": 400000,
+    "Test_mode": "Normal"
+  },
+  "dat_config": {
+    "TrainData_dir": "./data/Ex23SSALV/Ex23SSALV_train.mat",
+    "TestData_dir": "./data/Ex23SSALV/Ex23SSALV_test.mat",
+    "n_ea_traj": 8,
+    "pair_data": true,
+    "N_train_base": 10000,
+    "DiscretePred": true,
+    "N_pred": 10000
+  },
+  "monitor_config": {
+    "repdf_display": {
+      "if": true,
+      "times": 20,
+      "path": "./data/Ex23SSALV/Ex23SSALV_cond.mat"
+    },
+    "traindata_hist": true,
+    "traintransin_hist": true,
+    "cond_mv": {
+      "if": false,
+      "Npoint": 50,
+      "range": [
+        [
+          -2.0,
+          2.0
+        ],
+        [
+          -1.0,
+          1.0
+        ]
+      ],
+      "times": 20
+    },
+    "Evameanv": {
+      "if": true,
+      "times": 10,
+      "type": "Normal",
+      "sample": true
+    },
+    "loss": {
+      "if": true,
+      "times": 10
+    },
+    "Ens_monitor": {
+      "if": false,
+      "Ens_repdf": true,
+      "Ens_cond_mv": true,
+      "Ens_eva": true
+    }
+  }
+}
