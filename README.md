@@ -95,13 +95,13 @@ These examples correspond to [1].
 
 | Example | Result folder | Description | Model type |
 | --- | --- | --- | --- |
-| Ex12 | `results/Ex12` | OU process with drift control | NF, nonauto |
-| Ex15 | `results/Ex15` | Stochastic resonance / double-well with excitation | NF, nonauto |
-| Ex16 | `results/Ex16` | Nonlinear SDE with control | NF, nonauto |
-| Ex17 | `results/Ex17` | Stochastic predator-prey model with excitation | NF, nonauto |
-| Ex19 | `results/Ex19` | OU process with both drift and diffusion control | NF, nonauto |
-| Ex43 | `results/Ex43` | Gene expression SSA model with time-dependent reaction rate | ResNF, nonauto |
-| SPDEEx3 | `results/SPDEEx3` | Stochastic heat equation with source, modal/spectral form | ResNF, nonauto |
+| Ex12 | `results/Ex12` | OU process with drift control | NFNonAuto |
+| Ex15 | `results/Ex15` | Stochastic resonance / double-well with excitation | NFNonAuto |
+| Ex16 | `results/Ex16` | Nonlinear SDE with control | NFNonAuto |
+| Ex17 | `results/Ex17` | Stochastic predator-prey model with excitation | NFNonAuto |
+| Ex19 | `results/Ex19` | OU process with both drift and diffusion control | NFNonAuto |
+| Ex43 | `results/Ex43` | Gene expression SSA model with time-dependent reaction rate | ResNFNonAuto |
+| SPDEEx3 | `results/SPDEEx3` | Stochastic heat equation with source, modal/spectral form | ResNFNonAuto |
 
 ### Markovian Effective Dynamics of Multiscale SDEs
 
