@@ -153,7 +153,7 @@ Each run is controlled by a config file. For cleaned result folders, `results/<e
 - `N_rec`: number of consecutive transition steps used by the model during training or prediction. In the included configs this is typically `2`.
 - `batch_size`: training batch size.
 - `N_epochs`: number of training epochs.
-- `weight_decay`: weight-decay coefficient used by the optimizer.
+- `weight_decay`: weight-decay coefficient used by the optimizer for regularization and to help mitigate overfitting.
 - `Test_mode`: prediction/testing mode used during or after training. The included configs commonly use `Normal`.
 - `Note`: optional human-readable training note.
 - `l_rate`: legacy scalar learning-rate field.
