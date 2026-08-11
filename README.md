@@ -92,57 +92,50 @@ The main files are grouped by model type:
 
 ## Included Example
 
-The cleaned `results/` folder contains trained configs and weights for the following paper examples.
+The cleaned `results/` folder contains trained configs and weights for the following paper examples. We only provide configuration files and trained weights needed for reproduction; generated plots, logs, `predict.mat`, metrics folders, and production figure folders are not included by default.
 
 ### Nonautonomous and Controlled SDEs
 
 These examples correspond to [1].
 
-| Example | Result folder | Description | Model type | Provided |
-| --- | --- | --- | --- | --- |
-| Ex12 | `results/Ex12` | OU process with drift control | NF | Config, final weights, ensemble weights |
-| Ex15 | `results/Ex15` | Stochastic resonance / double-well with excitation | NF | Config and final weights |
-| Ex16 | `results/Ex16` | Nonlinear SDE with control | NF | Config and final weights |
-| Ex17 | `results/Ex17` | Stochastic predator-prey model with excitation | NF | Config and final weights |
-| Ex19 | `results/Ex19` | OU process with both drift and diffusion control | NF | Config, final weights, ensemble weights |
-| Ex43 | `results/Ex43` | Gene expression SSA model with time-dependent reaction rate | ResNF | Config and final weights |
-| SPDEEx3 | `results/SPDEEx3` | Stochastic heat equation with source, modal/spectral form | ResNF | Config and final weights |
+| Example | Result folder | Description | Model type |
+| --- | --- | --- | --- |
+| Ex12 | `results/Ex12` | OU process with drift control | NF |
+| Ex15 | `results/Ex15` | Stochastic resonance / double-well with excitation | NF |
+| Ex16 | `results/Ex16` | Nonlinear SDE with control | NF |
+| Ex17 | `results/Ex17` | Stochastic predator-prey model with excitation | NF |
+| Ex19 | `results/Ex19` | OU process with both drift and diffusion control | NF |
+| Ex43 | `results/Ex43` | Gene expression SSA model with time-dependent reaction rate | ResNF |
+| SPDEEx3 | `results/SPDEEx3` | Stochastic heat equation with source, modal/spectral form | ResNF |
 
 ### Markovian Effective Dynamics of Multiscale SDEs
 
 These examples correspond to [2].
 
-| Example | Result folder | Description | Model type | Provided |
+| Example | Result folder | Description | Model type |
+| --- | --- | --- | --- |
+| Ex28 | `results/Ex28` | Skew product SDE | NF |
+| Ex33 | `results/Ex33` | Exponential mean OU / multiscale exponential example | NF |
+| Ex38 | `results/Ex38` | Triad system | NF |
+| Ex34 | `results/Ex34` | 3D nonlinear multiscale SDE | NF |
+| Ex36 | `results/Ex36` | Multiscale stochastic oscillator | NF |
+
+### SSA / Chemical Reaction Networks
+
+These examples correspond to [3] and [4].
+
+| Paper | Example | Result folder | Description | Model type |
 | --- | --- | --- | --- | --- |
-| Ex28 | `results/Ex28` | Skew product SDE | NF | Config and final weights |
-| Ex33 | `results/Ex33` | Exponential mean OU / multiscale exponential example | NF | Config and final weights |
-| Ex38 | `results/Ex38` | Triad system | NF | Config and final weights |
-| Ex34 | `results/Ex34` | 3D nonlinear multiscale SDE | NF | Config and final weights |
-| Ex36 | `results/Ex36` | Multiscale stochastic oscillator | NF | Config and final weights |
-
-### SSA Paper I
-
-These examples correspond to [3].
-
-| Example | Result folder | Description | Model type | Provided |
-| --- | --- | --- | --- | --- |
-| Ex22 | `results/Ex22` | Transfer process | NF / conservative NF | Config and final weights |
-| Ex23 LV slow | `results/Ex23_LVSlow` | Slow Lotka-Volterra SSA model | NF | Config and final weights |
-| Ex23 LV fast | `results/Ex23_LVFast` | Fast Lotka-Volterra SSA model | ResNF | Config and final weights |
-| Ex25 | `results/Ex25` | Brusselator | NF | Config and final weights |
-| Ex27 | `results/Ex27` | Autocatalysis | ResNF | Config and final weights |
-| Ex26 | `results/Ex26` | Oregonator | ResNF | Config and final weights |
-
-### SSA Paper II
-
-These examples correspond to [4].
-
-| Example | Result folder | Description | Model type | Provided |
-| --- | --- | --- | --- | --- |
-| Ex45 | `results/Ex45` | Schlogl model | MixNF | Config, final weights, best weights |
-| Ex42 | `results/Ex42` | Vilar 2002 genetic oscillator model | MixNF / conservative MixNF | Config, final weights, best weights |
-| Ex41 | `results/Ex41` | Mammalian circadian clock model | MixNF | Config, final weights, best weights |
-| Ex23 Mix | `results/Ex23_Mix` | Lotka-Volterra SSA model with mixed prior | MixNF | Config and final weights |
+| [3] | Ex22 | `results/Ex22` | Transfer process | NF / conservative NF |
+| [3] | Ex23 LV slow | `results/Ex23_LVSlow` | Slow Lotka-Volterra SSA model | NF |
+| [3] | Ex23 LV fast | `results/Ex23_LVFast` | Fast Lotka-Volterra SSA model | ResNF |
+| [3] | Ex25 | `results/Ex25` | Brusselator | NF |
+| [3] | Ex27 | `results/Ex27` | Autocatalysis | ResNF |
+| [3] | Ex26 | `results/Ex26` | Oregonator | ResNF |
+| [4] | Ex45 | `results/Ex45` | Schlogl model | MixNF |
+| [4] | Ex42 | `results/Ex42` | Vilar 2002 genetic oscillator model | MixNF / conservative MixNF |
+| [4] | Ex41 | `results/Ex41` | Mammalian circadian clock model | MixNF |
+| [4] | Ex23 Mix | `results/Ex23_Mix` | Lotka-Volterra SSA model with mixed prior | MixNF |
 
 ## Preparation
 
