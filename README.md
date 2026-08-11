@@ -157,29 +157,12 @@ Each run is controlled by a config file. For cleaned result folders, `results/<e
 - `Test_mode`: prediction/testing mode used during or after training. The included configs commonly use `Normal`.
 - `Note`: optional human-readable training note.
 - `l_rate`: legacy scalar learning-rate field.
-- `l_rate_config`: active learning-rate configuration selected for the run.
-- `l_rate_config_value`: fixed learning-rate option.
-  - `name`: scheduler name, usually `value`.
-- `l_rate_config_step`: step-decay learning-rate option.
-  - `name`: scheduler name.
-  - `step`: decay step interval.
-  - `gamma`: multiplicative decay factor.
-- `l_rate_config_cyclic`: cyclic learning-rate option.
-  - `name`: scheduler name.
-  - `base`: lower learning-rate bound.
-  - `max`: upper learning-rate bound.
-  - `step`: cycle step length.
-  - `gamma`: decay factor for cycle amplitude when used.
-- `l_rate_config_Stepcyclic`: step-cyclic learning-rate option.
-  - `name`: scheduler name.
-  - `base`, `max`, `step`, `gamma`: cyclic scheduler parameters.
-  - `scale`: additional scaling factor.
-  - `gstep`: global step interval for scaling.
-- `l_rate_config_ROnPlat`: reduce-on-plateau learning-rate option.
-  - `name`: scheduler name.
-  - `minr`: minimum learning rate.
-  - `factor`: reduction factor.
-  - `patience`: patience before reducing the learning rate.
+- `l_rate_config`: active learning-rate configuration selected for the run. It can be one of the following options:
+  - `l_rate_config_value`: fixed learning rate.
+  - `l_rate_config_step`: step-decay learning rate, controlled by `step` and `gamma`.
+  - `l_rate_config_cyclic`: cyclic learning rate, controlled by `base`, `max`, `step`, and `gamma`.
+  - `l_rate_config_Stepcyclic`: step-cyclic learning rate, controlled by `base`, `max`, `step`, `gamma`, `scale`, and `gstep`.
+  - `l_rate_config_ROnPlat`: reduce-on-plateau learning rate, controlled by `minr`, `factor`, and `patience`.
 
 `dat_config`: data paths, prediction size, and sampling settings.
 
