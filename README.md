@@ -138,12 +138,10 @@ Each run is controlled by a config file. For cleaned result folders, `results/<e
 - `dim_para`: dimension of the external parameter, control, or forcing input for nonautonomous examples.
 - `Delta`: time-step size used by the flow map.
 - Model parameters: example-specific equation, physical parameters.
-
-Prior model: only used by Mix models.
-
-- `resmodel`: deterministic/prior model. Examples include `Exact` and `ChemicalODE`.
-- `resmodel_path`: path to the pretrained deterministic/prior model checkpoint.
-- `resconfig_path`: path to the config file for the deterministic/prior model.
+- Prior model: only used by Mix models.
+  - `resmodel`: deterministic/prior model. Examples include `Exact` and `ChemicalODE`.
+  - `resmodel_path`: path to the pretrained deterministic/prior model checkpoint.
+  - `resconfig_path`: path to the config file for the deterministic/prior model.
 
 `net_config`: normalizing-flow architecture and training settings.
 
