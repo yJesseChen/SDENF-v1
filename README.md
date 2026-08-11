@@ -42,7 +42,6 @@ The main folders are:
 | `config/` | Example JSON configs. The current cleaned copy keeps a small representative config for the autonomous SDE example. |
 | `data/` | MATLAB `.mat` datasets. The current cleaned copy includes selected small data files for the Ex4 autonomous SDE example. |
 | `results/` | Cleaned result folders for the included paper examples. Each folder keeps config and trained weights only. |
-| `routine/` | Shell scripts used for running and reproducing selected tests and production figures. |
 | `src/` | Supporting source files used by the flow models. |
 
 The main files are:
@@ -210,7 +209,6 @@ Residual NF runs use:
 python SolveResNFSDE.py --test_name=<run_name> --config_path=<config_path> --model_name=ResNFSDE
 ```
 
-The autonomous SDE routines under `routine/auto/` provide examples of ordinary NF and ResNF runs.
 
 ### Nonautonomous SDEs
 
@@ -228,7 +226,6 @@ Residual nonautonomous runs use:
 python SolveResNFNonAutoSDE.py --test_name=<run_name> --config_path=<config_path>
 ```
 
-The production scripts under `routine/prodcution_nonauto/` show how the provided nonautonomous examples were tested and plotted.
 
 ### SSA / Chemical Reaction Networks
 
@@ -270,7 +267,6 @@ or, for mixed/conservative SSA variants:
 python SolveMixNFSDE.py --test_name=<run_name> --config_path=<config_path> --model_name=MixNFSDE_SSAgenconserve
 ```
 
-The production scripts under `routine/production_chemical/` show how selected SSA examples were tested and plotted.
 
 ### Post Test and Validation
 
@@ -292,7 +288,6 @@ Additional performance plots can be generated with:
 python ShowPerformance.py --test_name=<example>
 ```
 
-The routine scripts provide concrete command examples for different paper figures and test cases.
 
 ## Model Outputs
 
