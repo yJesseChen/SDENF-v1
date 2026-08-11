@@ -264,6 +264,13 @@ where `*_i` stores the fixed initial condition and `*_d` stores samples from the
 
 ## Model Execution
 
+Common command-line arguments:
+
+- `test_name`: name of the run or saved result folder. Training writes outputs to `results/<test_name>/`; testing and plotting reload from this folder.
+- `config_path`: path to the JSON config file used for training.
+- `model_name`: model class selected by the script, such as `NFSDE`, `ResNFSDE`, `MixNFSDE`, `NFNonAutoSDE`, `ResNFNonAutoSDE`, `NFSDE_SSAconserve`, `ResNFSDE_SSAgenconserve`, or `MixNFSDE_SSAgenconserve`.
+- `test_case`: postprocessing case name used by `ShowProdcution.py`. Different values correspond to different test datasets, prediction horizons, or figure-production settings for the same trained model.
+
 ### Autonomous SDE and Markovian Effective Dynamics of Multiscale SDEs
 
 This category uses NF and ResNF models for autonomous stochastic dynamics and Markovian effective dynamics of multiscale SDEs.
