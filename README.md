@@ -224,11 +224,6 @@ Each run is controlled by a config file. For cleaned result folders, `results/<e
   - `if`: enable or disable stopping-time evaluation.
   - `path`: output or reference path.
 
-Other top-level metadata fields may appear in runner-generated configs:
-
-- `runner_note`: note added by a training or rerun script.
-- `run_metadata`: bookkeeping information such as `base_config`, `train_data`, `test_data`, `boundary_train_data`, `n_ea_traj`, and a runner note. These fields document how a rerun was constructed and are not usually model hyperparameters.
-
 ### Data Format
 
 Training and test data are stored as MATLAB `.mat` files.
