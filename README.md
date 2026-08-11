@@ -48,47 +48,30 @@ The main folders are:
 | `results/` | Cleaned result folders for the included paper examples. Each folder keeps config and trained weights only. |
 | `src/` | Supporting source files used by the flow models. |
 
-The main files are grouped by model type:
+The main files are grouped by model type in the table below:
 
-### NF
-
-| File | Purpose |
-| --- | --- |
-| `SolveNFSDE.py` | Training entry point for ordinary NF SDE models, including autonomous SDE examples and some SSA examples. |
-| `NFSDE.py` | Core NF SDE model implementation. |
-| `SolveNFNonAutoSDE.py` | Training entry point for nonautonomous NF SDE models. |
-| `NFNonAutoSDE.py` | Nonautonomous NF model implementation. |
-| `NFSDE_SSAconserve.py` | Conservative NF variant for SSA examples. |
-
-### ResNF
-
-| File | Purpose |
-| --- | --- |
-| `SolveResNFSDE.py` | Training entry point for residual NF SDE models. |
-| `ResNFSDE.py` | Core residual NF SDE model implementation. |
-| `SolveResNFNonAutoSDE.py` | Training entry point for residual nonautonomous NF SDE models. |
-| `ResNFNonAutoSDE.py` | Nonautonomous residual NF model implementation. |
-| `ResNFSDE_SSAgenconserve.py` | Residual/conservative NF variant for SSA examples. |
-
-### MixNF
-
-| File | Purpose |
-| --- | --- |
-| `SolveMixNFSDE.py` | Training entry point for mixed NF models. |
-| `MixNFSDE.py` | Core mixed NF SDE model implementation. |
-| `SolveMixNFNonAutoSDE.py` | Training entry point for mixed nonautonomous NF SDE models. |
-| `MixNFNonAutoSDE.py` | Nonautonomous mixed NF model implementation. |
-| `MixNFSDE_SSAgenconserve.py` | Mixed/conservative NF variant for SSA examples. |
-| `Chemical_Dynamics.py` | Chemical-dynamics helper functions used by MixNF SSA examples. |
-
-### Post Validation and Plots
-
-| File | Purpose |
-| --- | --- |
-| `ShowTest.py` | Testing and prediction entry point for trained models. |
-| `ShowProdcution.py` | Postprocessing entry point for production/paper-style figures. |
-| `ShowPerformance.py` | Additional performance and diagnostic plotting utility. |
-| `Evaulation.py` and `Prodcution.py` | Evaluation and production plotting utilities. |
+| Category | File | Purpose |
+| --- | --- | --- |
+| NF | `SolveNFSDE.py` | Training entry point for ordinary NF SDE models, including autonomous SDE examples and some SSA examples. |
+| NF | `NFSDE.py` | Core NF SDE model implementation. |
+| NF | `SolveNFNonAutoSDE.py` | Training entry point for nonautonomous NF SDE models. |
+| NF | `NFNonAutoSDE.py` | Nonautonomous NF model implementation. |
+| NF | `NFSDE_SSAconserve.py` | Conservative NF variant for SSA examples. |
+| ResNF | `SolveResNFSDE.py` | Training entry point for residual NF SDE models. |
+| ResNF | `ResNFSDE.py` | Core residual NF SDE model implementation. |
+| ResNF | `SolveResNFNonAutoSDE.py` | Training entry point for residual nonautonomous NF SDE models. |
+| ResNF | `ResNFNonAutoSDE.py` | Nonautonomous residual NF model implementation. |
+| ResNF | `ResNFSDE_SSAgenconserve.py` | Residual/conservative NF variant for SSA examples. |
+| MixNF | `SolveMixNFSDE.py` | Training entry point for mixed NF models. |
+| MixNF | `MixNFSDE.py` | Core mixed NF SDE model implementation. |
+| MixNF | `SolveMixNFNonAutoSDE.py` | Training entry point for mixed nonautonomous NF SDE models. |
+| MixNF | `MixNFNonAutoSDE.py` | Nonautonomous mixed NF model implementation. |
+| MixNF | `MixNFSDE_SSAgenconserve.py` | Mixed/conservative NF variant for SSA examples. |
+| MixNF | `Chemical_Dynamics.py` | Chemical-dynamics helper functions used by MixNF SSA examples. |
+| Post Validation and Plots | `ShowTest.py` | Testing and prediction entry point for trained models. |
+| Post Validation and Plots | `ShowProdcution.py` | Postprocessing entry point for production/paper-style figures. |
+| Post Validation and Plots | `ShowPerformance.py` | Additional performance and diagnostic plotting utility. |
+| Post Validation and Plots | `Evaulation.py` and `Prodcution.py` | Evaluation and production plotting utilities. |
 
 ## Included Example
 
