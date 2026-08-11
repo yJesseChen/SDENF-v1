@@ -113,14 +113,14 @@ These examples correspond to [3] and [4].
 
 | Paper | Example | Result folder | Description | Model type |
 | --- | --- | --- | --- | --- |
-| [3] | Ex22 | `results/Ex22` | Transfer process | NF / conservative NF |
+| [3] | Ex22 | `results/Ex22` | Transfer process | Conservative NF |
 | [3] | Ex23 LV slow | `results/Ex23_LVSlow` | Slow Lotka-Volterra SSA model | NF |
 | [3] | Ex23 LV fast | `results/Ex23_LVFast` | Fast Lotka-Volterra SSA model | ResNF |
 | [3] | Ex25 | `results/Ex25` | Brusselator | NF |
-| [3] | Ex27 | `results/Ex27` | Autocatalysis | ResNF |
+| [3] | Ex27 | `results/Ex27` | Autocatalysis | Conservative ResNF |
 | [3] | Ex26 | `results/Ex26` | Oregonator | ResNF |
 | [4] | Ex45 | `results/Ex45` | Schlogl model | MixNF |
-| [4] | Ex42 | `results/Ex42` | Vilar 2002 genetic oscillator model | MixNF / conservative MixNF |
+| [4] | Ex42 | `results/Ex42` | Vilar 2002 genetic oscillator model | Conservative MixNF |
 | [4] | Ex41 | `results/Ex41` | Mammalian circadian clock model | MixNF |
 | [4] | Ex23 Mix | `results/Ex23_Mix` | Lotka-Volterra SSA model with mixed prior | MixNF |
 
