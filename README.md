@@ -130,9 +130,11 @@ These examples correspond to [3] and [4].
 
 Each run is controlled by a config file. For cleaned result folders, `results/<example>/Test_config.json` records the settings used for that trained model. Not every example uses every parameter below; example-specific parameters are read only by the corresponding equation, model, or plotting routine.
 
-<p><strong><span style="color:#0969da">For a first run, I recommend starting from the config of a similar provided example, replacing the data paths with your own data, and setting all monitor `if` fields to `false` for convenience.</span></strong></p>
+<p><strong><span style="color:#0969da">For a first run, I recommend starting from the config of a similar provided example and replacing the data paths with your own data. The `monitor_config` section is used to monitor performance during training; it is useful but not mandatory. <u>You can set all monitor `if` fields to `false` to avoid complex errors.</u></span></strong></p>
 
-`eqn_config`: equation and physical-model settings. Here is the full list of those parameters:
+Here is the full list of those parameters:
+
+`eqn_config`: equation and physical-model settings.
 
 - `_comment`: human-readable note for the example.
 - `eqn_name`: equation, SDE, SPDE, or SSA example name used by the evaluation and plotting code.
@@ -176,10 +178,10 @@ Each run is controlled by a config file. For cleaned result folders, `results/<e
   - If `pair_data` is `true`, the code treats `data` as precomputed input/output transition pairs. For the usual `N_rec = 2` case, the expected shape is `[dim, 2, number_of_pairs]`, where `data[:, 0, :]` stores inputs and `data[:, 1, :]` stores outputs.
     - In pair-data mode, `N_train_base` is the number of base transition pairs used for each repeat, and the effective training size is `N_train_base * n_ea_traj`.
     - For example, `N_train_base = 10000` and `n_ea_traj = 12` gives `120000` training pairs. The pair-data file should contain at least `120000` available pairs.
-- `N_pred`: number of prediction trajectories used by the standard prediction routines.
+- `N_pred`: number of prediction trajectories used by standard prediction and monitoring routines. In practice, set this to match the number of trajectories in `TestData_dir` for the usual test workflow; ensemble and monitoring code use it when allocating prediction arrays.
 - `Test_mode`: testing data mode. The included configs commonly use `Normal`.
-- `DiscretePred`: whether prediction is treated as a discrete-step prediction problem.
-- `ConstrainedPred`: whether prediction uses conservation or feasibility constraints.
+- `DiscretePred`: whether prediction output should be projected to discrete count data. If enabled, after each model prediction the code sets negative values to `0` and rounds the result to integers. This is mainly useful for SSA/count-valued examples.
+- `ConstrainedPred`: whether prediction should enforce a simple feasibility constraint. In the current code this is used for `SSALV`; invalid trajectories that hit near-zero population values are filtered out during recursive prediction, and the code repeats prediction attempts until it fills the requested test-data size or reaches the retry limit.
 
 `show_config`: standard postprocessing switches.
 
@@ -189,8 +191,8 @@ Each run is controlled by a config file. For cleaned result folders, `results/<e
 
 `monitor_config`: training-time and validation-time diagnostics.
 
-- `traindata_hist`: whether to plot training-data histograms.
-- `traintransin_hist`: whether to plot transition-input histograms.
+- `traindata_hist`: whether to plot a two-dimensional hit diagram of the sampled training trajectories. The plot shows time on the horizontal axis, state value on the vertical axis, and point density by color; files are saved under `Monitor/dataplot/hist_Train_data*.png`.
+- `traintransin_hist`: whether to plot histograms of transition inputs `X_s` used for training. These plots help check whether the sampled transition inputs cover the expected state range; files are saved under `Monitor/dataplot/hist_input_Train_data*.png`.
 - `repdf_display`: repeated density/PDF display settings.
   - `if`: enable or disable the monitor.
   - `size`: number of samples used for the display when present.
@@ -211,17 +213,17 @@ Each run is controlled by a config file. For cleaned result folders, `results/<e
 - `loss`: loss plotting monitor.
   - `if`: enable or disable the monitor.
   - `times`: epochs or iterations at which to save the loss plot.
-- `Ens_monitor`: ensemble-checkpoint monitor.
+- `Ens_monitor`: ensemble-checkpoint monitor. When enabled, the code saves multiple model checkpoints at scheduled late-stage epochs under `Monitor/Ens_model/`. At selected endpoint epochs, it reloads those saved models and can generate ensemble diagnostics.
   - `if`: enable or disable ensemble checkpointing.
-  - `Ens_repdf`: ensemble density/PDF diagnostics.
-  - `Ens_cond_mv`: ensemble conditional mean/variance diagnostics.
-  - `Ens_eva`: ensemble mean/std evaluation diagnostics.
-- `Best_monitor`: best-model checkpoint monitor.
+  - `Ens_repdf`: generate ensemble repeated density/PDF diagnostics.
+  - `Ens_cond_mv`: generate ensemble conditional mean/variance diagnostics.
+  - `Ens_eva`: generate ensemble recursive prediction mean/std diagnostics.
+- `Best_monitor`: best-model checkpoint monitor. When enabled, the code tracks the best monitored objective during training and saves the current best model under `Monitor/Best_model/model.pt`. At scheduled evaluation times, it can reload that best model and generate diagnostics.
   - `if`: enable or disable best-model monitoring.
-  - `Best_repdf`: density/PDF diagnostics for the best model.
-  - `Best_cond_mv`: conditional mean/variance diagnostics for the best model.
-  - `Best_eva`: mean/std evaluation diagnostics for the best model.
-  - `sample`: optional sample count for selected examples.
+  - `Best_repdf`: generate density/PDF diagnostics using the best model.
+  - `Best_cond_mv`: generate conditional mean/variance diagnostics using the best model when supported.
+  - `Best_eva`: generate recursive prediction mean/std diagnostics using the best model.
+  - `sample`: optional sample-count setting for selected examples.
 - `stoppingtime`: stopping-time diagnostics for selected SSA examples.
   - `if`: enable or disable stopping-time evaluation.
   - `path`: output or reference path.
