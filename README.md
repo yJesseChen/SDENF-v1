@@ -137,7 +137,7 @@ Each run is controlled by a config file. For cleaned result folders, `results/<e
 - `dim`: state dimension.
 - `dim_para`: dimension of the external parameter, control, or forcing input for nonautonomous examples.
 - `Delta`: time-step size used by the flow map.
-- Model parameters: example-specific equation, physical, reaction, noise, control, or forcing parameters. These include fields such as `para`, `mu`, `sigma`, `theta`, `sigma_`, `sigma_1`, `sigma_2`, `sigma_3`, `alpha`, `gamma`, `lambda_`, `epsilon`, `p`, `q`, `V`, `f_`, `omega`, `omega2`, `s1`, and `s2`.
+- Model parameters: example-specific equation, physical parameters.
 - `resmodel`: deterministic/prior model used by ResNF or MixNF examples. Examples include `Exact` and `ChemicalODE`.
 - `resmodel_path`: path to the pretrained deterministic/prior model checkpoint when the run uses one.
 - `resconfig_path`: path to the config file for the deterministic/prior model when the run uses one.
