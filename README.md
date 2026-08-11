@@ -232,7 +232,7 @@ python SolveResNFNonAutoSDE.py --test_name=<run_name> --config_path=<config_path
 
 This category uses NF, ResNF, and MixNF models for SSA examples.
 
-NF or conservative NF SSA runs use:
+NF SSA runs use:
 
 ```bash
 python SolveNFSDE.py --test_name=<run_name> --config_path=<config_path> --model_name=NFSDE
