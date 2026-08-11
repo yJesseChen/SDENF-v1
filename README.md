@@ -130,7 +130,7 @@ These examples correspond to [3] and [4].
 
 Each run is controlled by a config file. For cleaned result folders, `results/<example>/Test_config.json` records the settings used for that trained model. Not every example uses every parameter below; example-specific parameters are read only by the corresponding equation, model, or plotting routine.
 
-`eqn_config`: equation, prior, and physical-model settings.
+`eqn_config`: equation and physical-model settings.
 
 - `_comment`: human-readable note for the example.
 - `eqn_name`: equation, SDE, SPDE, or SSA example name used by the evaluation and plotting code.
@@ -138,9 +138,12 @@ Each run is controlled by a config file. For cleaned result folders, `results/<e
 - `dim_para`: dimension of the external parameter, control, or forcing input for nonautonomous examples.
 - `Delta`: time-step size used by the flow map.
 - Model parameters: example-specific equation, physical parameters.
-- `resmodel`: deterministic/prior model used by ResNF or MixNF examples. Examples include `Exact` and `ChemicalODE`.
-- `resmodel_path`: path to the pretrained deterministic/prior model checkpoint when the run uses one.
-- `resconfig_path`: path to the config file for the deterministic/prior model when the run uses one.
+
+Prior model: only used by Mix models.
+
+- `resmodel`: deterministic/prior model. Examples include `Exact` and `ChemicalODE`.
+- `resmodel_path`: path to the pretrained deterministic/prior model checkpoint.
+- `resconfig_path`: path to the config file for the deterministic/prior model.
 
 `net_config`: normalizing-flow architecture and training settings.
 
