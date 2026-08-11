@@ -130,6 +130,8 @@ These examples correspond to [3] and [4].
 
 Each run is controlled by a config file. For cleaned result folders, `results/<example>/Test_config.json` records the settings used for that trained model. Not every example uses every parameter below; example-specific parameters are read only by the corresponding equation, model, or plotting routine.
 
+<p><strong><span style="color:#0969da">For a first run, I recommend starting from the config of a similar provided example, replacing the data paths with your own data, and setting all monitor `if` fields to `false` for convenience.</span></strong></p>
+
 `eqn_config`: equation and physical-model settings.
 
 - `_comment`: human-readable note for the example.
