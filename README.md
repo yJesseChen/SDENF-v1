@@ -79,12 +79,12 @@ The main files are grouped by model type:
 | `SolveMixNFNonAutoSDE.py` | Training entry point for mixed nonautonomous NF SDE models. |
 | `MixNFNonAutoSDE.py` | Nonautonomous mixed NF model implementation. |
 | `MixNFSDE_SSAgenconserve.py` | Mixed/conservative NF variant for SSA examples. |
+| `Chemical_Dynamics.py` | Chemical-dynamics helper functions used by MixNF SSA examples. |
 
-### Shared Utilities
+### Post Validation and Plots
 
 | File | Purpose |
 | --- | --- |
-| `Chemical_Dynamics.py` | Chemical-dynamics helper functions used by SSA examples. |
 | `ShowTest.py` | Testing and prediction entry point for trained models. |
 | `ShowProdcution.py` | Postprocessing entry point for production/paper-style figures. |
 | `ShowPerformance.py` | Additional performance and diagnostic plotting utility. |
