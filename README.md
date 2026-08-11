@@ -2,9 +2,9 @@
 
 This repository contains normalizing-flow implementations for stochastic flow map learning. The code supports three related model forms:
 
-- **NF**: a direct normalizing-flow model for stochastic flow-map transitions.
-- **ResNF**: a residual normalizing-flow model that learns the stochastic correction around a deterministic or coarse flow-map component.
-- **Mix NF**: a mixed normalizing-flow model. In the SSA examples from the second SSA paper, this uses an ODE or chemical-dynamics prior and learns the remaining stochastic component around that prior.
+- **NF**: a direct normalizing-flow model for stochastic flow-map transitions, $x_{n+1} = G_\theta(x_n, z)$.
+- **ResNF**: a residual normalizing-flow model, $x_{n+1} = x_n + G_\theta(x_n, z)$.
+- **MixNF**: a mixed normalizing-flow model, $x_{n+1} = \Phi(x_n) + G_\theta(x_n, z)$. In the SSA examples from the second SSA paper, $\Phi$ is an ODE or chemical-dynamics prior, and the normalizing flow learns the remaining stochastic component around that prior.
 
 The examples in this repository apply these models to three settings: ordinary stochastic differential equations, including autonomous and nonautonomous systems; Markovian effective dynamics of multiscale SDEs; and stochastic simulation algorithm models for chemical reaction networks.
 
@@ -119,10 +119,10 @@ These examples correspond to [4].
 
 | Example | Result folder | Description | Model type | Provided |
 | --- | --- | --- | --- | --- |
-| Ex45 | `results/Ex45` | Schlogl model | Mix NF | Config, final weights, best weights |
-| Ex42 | `results/Ex42` | Vilar 2002 genetic oscillator model | Mix NF / conservative Mix NF | Config, final weights, best weights |
-| Ex41 | `results/Ex41` | Mammalian circadian clock model | Mix NF | Config, final weights, best weights |
-| Ex23 Mix | `results/Ex23_Mix` | Lotka-Volterra SSA model with mixed prior | Mix NF | Config and final weights |
+| Ex45 | `results/Ex45` | Schlogl model | MixNF | Config, final weights, best weights |
+| Ex42 | `results/Ex42` | Vilar 2002 genetic oscillator model | MixNF / conservative MixNF | Config, final weights, best weights |
+| Ex41 | `results/Ex41` | Mammalian circadian clock model | MixNF | Config, final weights, best weights |
+| Ex23 Mix | `results/Ex23_Mix` | Lotka-Volterra SSA model with mixed prior | MixNF | Config and final weights |
 
 ## Preparation
 
@@ -138,13 +138,13 @@ The main config sections follow the same pattern across model classes:
 - `dim`: dimension of the state variable when applicable.
 - `Delta`: time-step size when applicable.
 - Example-specific parameters: drift, diffusion, reaction-rate, control, or external-excitation parameters.
-- Prior/residual settings: for ResNF or Mix NF examples, this may include the deterministic/residual prior model type and paths.
+- Prior/residual settings: for ResNF or MixNF examples, this may include the deterministic/residual prior model type and paths.
 
 `net_config`: normalizing-flow architecture and training settings.
 
 - `fname`: flow architecture. The provided examples mainly use masked autoregressive flows (`MAF`).
 - Hidden-layer, node, optimizer, learning-rate, batch-size, and epoch settings.
-- Model-specific settings for NF, ResNF, Mix NF, conservative variants, and nonautonomous variants.
+- Model-specific settings for NF, ResNF, MixNF, conservative variants, and nonautonomous variants.
 
 `dat_config`: data paths and sampling settings.
 
@@ -232,7 +232,7 @@ The production scripts under `routine/prodcution_nonauto/` show how the provided
 
 ### SSA / Chemical Reaction Networks
 
-This category uses NF, ResNF, and Mix NF models for SSA examples.
+This category uses NF, ResNF, and MixNF models for SSA examples.
 
 NF or conservative NF SSA runs use:
 
@@ -258,7 +258,7 @@ or, for residual/conservative SSA variants:
 python SolveResNFSDE.py --test_name=<run_name> --config_path=<config_path> --model_name=ResNFSDE_SSAgenconserve
 ```
 
-Mix NF runs use an ODE or chemical-dynamics prior and learn the remaining stochastic component around that prior:
+MixNF runs use an ODE or chemical-dynamics prior and learn the remaining stochastic component around that prior:
 
 ```bash
 python SolveMixNFSDE.py --test_name=<run_name> --config_path=<config_path> --model_name=MixNFSDE
