@@ -132,7 +132,7 @@ Each run is controlled by a config file. For cleaned result folders, `results/<e
 
 <p><strong><span style="color:#0969da">For a first run, I recommend starting from the config of a similar provided example, replacing the data paths with your own data, and setting all monitor `if` fields to `false` for convenience.</span></strong></p>
 
-`eqn_config`: equation and physical-model settings.
+`eqn_config`: equation and physical-model settings. Here is the full list of those parameters:
 
 - `_comment`: human-readable note for the example.
 - `eqn_name`: equation, SDE, SPDE, or SSA example name used by the evaluation and plotting code.
