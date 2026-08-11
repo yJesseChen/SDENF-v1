@@ -118,18 +118,18 @@ These examples correspond to [2].
 
 These examples correspond to [3].
 
-| Paper | Example | Result folder | Description | Model type |
-| --- | --- | --- | --- | --- |
-| [3] | Ex22 | `results/Ex22` | Transfer process | Conservative NF |
-| [3] | Ex23 LV slow | `results/Ex23_LVSlow` | Slow Lotka-Volterra SSA model | NF |
-| [3] | Ex23 LV fast | `results/Ex23_LVFast` | Fast Lotka-Volterra SSA model | ResNF |
-| [3] | Ex25 | `results/Ex25` | Brusselator | NF |
-| [3] | Ex27 | `results/Ex27` | Autocatalysis | Conservative ResNF |
-| [3] | Ex26 | `results/Ex26` | Oregonator | ResNF |
-| [3] | Ex45 | `results/Ex45` | Schlogl model | MixNF |
-| [3] | Ex42 | `results/Ex42` | Vilar 2002 genetic oscillator model | Conservative MixNF |
-| [3] | Ex41 | `results/Ex41` | Mammalian circadian clock model | MixNF |
-| [3] | Ex23 Mix | `results/Ex23_Mix` | Lotka-Volterra SSA model with mixed prior | MixNF |
+| Example | Result folder | Description | Model type |
+| --- | --- | --- | --- |
+| Ex22 | `results/Ex22` | Transfer process | Conservative NF |
+| Ex23 LV slow | `results/Ex23_LVSlow` | Slow Lotka-Volterra SSA model | NF |
+| Ex23 LV fast | `results/Ex23_LVFast` | Fast Lotka-Volterra SSA model | ResNF |
+| Ex25 | `results/Ex25` | Brusselator | NF |
+| Ex27 | `results/Ex27` | Autocatalysis | Conservative ResNF |
+| Ex26 | `results/Ex26` | Oregonator | ResNF |
+| Ex45 | `results/Ex45` | Schlogl model | MixNF |
+| Ex42 | `results/Ex42` | Vilar 2002 genetic oscillator model | Conservative MixNF |
+| Ex41 | `results/Ex41` | Mammalian circadian clock model | MixNF |
+| Ex23 Mix | `results/Ex23_Mix` | Lotka-Volterra SSA model with mixed prior | MixNF |
 
 ## Preparation
 
