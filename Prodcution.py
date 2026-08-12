@@ -2024,16 +2024,16 @@ class Evaluate():
 			axes.yaxis.set_tick_params(labelsize=18)
 			fig.savefig(save+'condmean'+'.pdf',dpi=150)
 
-			fig, axes = plt.subplots(ncols=1, figsize=(6, 4), constrained_layout=True)
-			plt.rcParams['text.usetex'] = True
-			axes.plot(p_grid,np.zeros(p_grid.shape),linestyle='-', linewidth=2.5,color='#000080',label='Reference')
-			axes.plot(p_grid,Mean_t-Mean_d,linestyle='dashed', linewidth=2.5,color='#DC143C',label='Learned')
-			axes.legend(prop=font2)
-			axes.xaxis.set_tick_params(labelsize=18)
-			axes.yaxis.set_tick_params(labelsize=18)
-			# axes.set_ylim([-5,5])
-			fig.savefig(save+'condmeanerror'+'.pdf',dpi=150)
-			print('Mean Norm: %.4e'%(np.sqrt(p_grid[1]-p_grid[0])*np.sqrt(np.sum((Mean_t-Mean_d)**2))))
+			# Condmean error plot and printed error metrics are disabled in the public package.
+			# fig, axes = plt.subplots(ncols=1, figsize=(6, 4), constrained_layout=True)
+			# plt.rcParams['text.usetex'] = True
+			# axes.plot(p_grid,np.zeros(p_grid.shape),linestyle='-', linewidth=2.5,color='#000080',label='Reference')
+			# axes.plot(p_grid,Mean_t-Mean_d,linestyle='dashed', linewidth=2.5,color='#DC143C',label='Learned')
+			# axes.legend(prop=font2)
+			# axes.xaxis.set_tick_params(labelsize=18)
+			# axes.yaxis.set_tick_params(labelsize=18)
+			# fig.savefig(save+'condmeanerror'+'.pdf',dpi=150)
+			# print('Mean Norm: %.4e'%(np.sqrt(p_grid[1]-p_grid[0])*np.sqrt(np.sum((Mean_t-Mean_d)**2))))
 
 			fig, axes = plt.subplots(ncols=1, figsize=(6, 4), constrained_layout=True)
 			plt.rcParams['text.usetex'] = True
@@ -2048,7 +2048,7 @@ class Evaluate():
 				axes.set_ylim([0.45,0.55])
 			fig.savefig(save+'condstd'+'.pdf',dpi=150)
 			plt.close()
-			print('STD Norm: %.4e'%(np.sqrt(p_grid[1]-p_grid[0])*np.sqrt(np.sum((Std_t-Std_d)**2))))
+			# print('STD Norm: %.4e'%(np.sqrt(p_grid[1]-p_grid[0])*np.sqrt(np.sum((Std_t-Std_d)**2))))
 		elif self.eqn_config.dim==2 and self.eqn_config.eqn_name in ['MdOU','SO']:
 			# if self.eqn_config.eqn_name in ['MdOU']:
 			# 	mzlim = [-3,3]

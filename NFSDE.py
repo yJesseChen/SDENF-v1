@@ -541,17 +541,18 @@ class Monitor():
 				axes[3].set_title("Error of Std $Std(\cdot|X_s)$, ite %d"%(epoch+1))
 				axes[3].set_xlabel('$X_s$')
 
-				if (epoch+1==self.N_epochs):
-					Err_d = np.sqrt(np.sum((Mean_d-Mean_t)**2)*(l2-l1)/Npoint)/np.sqrt(np.sum((Mean_t)**2)*(l2-l1)/Npoint)
-					Err_s = np.sqrt(np.sum((Std_d-Std_t)**2)*(l2-l1)/Npoint)/np.sqrt(np.sum((Std_t)**2)*(l2-l1)/Npoint)
-					errpath  = './error.mat'
-					if os.path.exists(errpath):
-						data = sio.loadmat(errpath)
-						data['Err_d'] = np.append(data['Err_d'],Err_d)
-						data['Err_s'] = np.append(data['Err_s'],Err_s)
-						sio.savemat(errpath,data)
-					else:
-						sio.savemat(errpath,{'Err_d':np.array((Err_d)),'Err_s':np.array((Err_s))})
+				# Error metric accumulation is disabled in the public package.
+				# if (epoch+1==self.N_epochs):
+				# 	Err_d = np.sqrt(np.sum((Mean_d-Mean_t)**2)*(l2-l1)/Npoint)/np.sqrt(np.sum((Mean_t)**2)*(l2-l1)/Npoint)
+				# 	Err_s = np.sqrt(np.sum((Std_d-Std_t)**2)*(l2-l1)/Npoint)/np.sqrt(np.sum((Std_t)**2)*(l2-l1)/Npoint)
+				# 	errpath  = './error.mat'
+				# 	if os.path.exists(errpath):
+				# 		data = sio.loadmat(errpath)
+				# 		data['Err_d'] = np.append(data['Err_d'],Err_d)
+				# 		data['Err_s'] = np.append(data['Err_s'],Err_s)
+				# 		sio.savemat(errpath,data)
+				# 	else:
+				# 		sio.savemat(errpath,{'Err_d':np.array((Err_d)),'Err_s':np.array((Err_s))})
 
 				fig.savefig(path+'/cond_mvplot'+str(epoch+1)+'.png',dpi=150)
 				plt.close()
