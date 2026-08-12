@@ -446,46 +446,17 @@ class Evaluate():
 			fig1.savefig(savepath)
 		return fig1,ax1
 
-	# def plot_acf(self,name,testdata,predictdata,Delta,savepath=None):
-		# data should be in the form of Ndata*test
-		# if name=='Ex17PredPrey':
-			# fig_size = [6,4]
-		# else:
-			# fig_size = [6,4]
-		# Test data
-		# xt_test = np.arange(testdata.shape[-1]-1)*Delta
-		# ac_test = self.compute_acf_ens(testdata)
-		# Predict data
-		# xt_pred = np.arange(predictdata.shape[-1]-1)*Delta
-		# ac_pred = self.compute_acf_ens(predictdata)
-		# plot
-		# fig1, ax1 = plt.subplots(figsize=fig_size)
-		# plt.rcParams['text.usetex'] = True
-		# ax1.plot(xt_test, ac_test, linewidth=2.0, color='#000080', label='Ground Truth')
-		# ax1.plot(xt_pred, ac_pred, linewidth=2.0, color='#DC143C', label='Prediction', linestyle='dashed')
-		# ax1.set_xlabel(r'$\tau$', {'size': 13})
-		# ax1.set_ylabel('ACF', {'size': 13})
-		# ax1.legend(prop={'size': 13})
-		# if savepath is not None:
-			# fig1.savefig(savepath, bbox_inches='tight')
-		# return fig1,ax1
+	def plot_acf(self,name,testdata,predictdata,Delta,savepath=None):
+		# Disabled in the public package.
+		pass
 
-	# def compute_acf(self,onedts,tau):
-		# N = onedts.shape[0]
-		# m = np.mean(onedts)
-		# v = np.var(onedts,ddof=1)
-		# acov = np.sum((onedts[:N-tau]-m)*(onedts[tau:]-m))/(N-1)
-		# return acov/v
+	def compute_acf(self,onedts,tau):
+		# Disabled in the public package.
+		pass
 
-	# def compute_acf_ens(self,dataset):
-		# for dataset in form of [Ndata,Ntime]
-		# Ndata,Ntime = dataset.shape
-		# re = np.zeros([Ndata,Ntime-1])
-		# for i in range(Ndata):
-			# print("ACF Number of trajectory: %d/%d \r"%(i+1,Ndata), sep=' ', end='', flush=True)
-			# for j in range(Ntime-1):
-				# re[i,j] = self.compute_acf(dataset[i],j)
-		# return np.mean(re,axis=0)
+	def compute_acf_ens(self,dataset):
+		# Disabled in the public package.
+		pass
 
 	def plot_endpdfGeneralD(self,testdataMD,predictdataMD,dim,savepath=None):
 		# data should be in the form of dim*Ndata
@@ -522,51 +493,8 @@ class Evaluate():
 		return fig1,axes
 
 	def plot_mem_meanstd(self,name,testdata,predictdata,Delta,delay,ylabels=None,Resdata=None,slice=0,savepath=None):
-		# data should be in the form of Ndata*test
-		if name=='Ex17PredPrey':
-			fig_size = [6,4]
-		else:
-			fig_size = [6,4]
-		# Test data
-		xt_test = np.arange(testdata.shape[-1])*Delta
-		xmean_test = np.mean(testdata,axis=0)
-		xstde_test = np.std(testdata,axis=0,ddof=1)
-		xt_test,xmean_test,xstde_test = xt_test[slice:],xmean_test[slice:],xstde_test[slice:]
-		# Predict data
-		xt_pred = np.arange(predictdata.shape[-1])*Delta
-		xmean_pred = np.mean(predictdata,axis=0)
-		xstde_pred = np.std(predictdata,axis=0,ddof=1)
-		xt_pred,xmean_pred,xstde_pred = xt_pred[slice:],xmean_pred[slice:],xstde_pred[slice:]
-		# Bound
-		test_l,test_u = xmean_test - xstde_test, xmean_test + xstde_test
-		pred_l,pred_u = xmean_pred - xstde_pred, xmean_pred + xstde_pred
-		# plot
-		fig1, ax1 = plt.subplots(figsize=fig_size)
-		plt.rcParams['text.usetex'] = True
-		# observed memory
-		ax1.plot(xt_test[:delay+1], xmean_test[:delay+1], linewidth=2.0, color='grey', label='Observation Mean')
-		ax1.fill_between(xt_test[:delay+1], test_l[:delay+1], test_u[:delay+1], color='grey', alpha=0.35, label='Observation Std')
-		# prediction
-		ax1.plot(xt_test[delay:], xmean_test[delay:], linewidth=2.0, color='#000080', label='Ground Truth Mean')
-		ax1.fill_between(xt_test[delay:], test_l[delay:], test_u[delay:], color='#000080', alpha=0.2, label='Ground Truth Std')
-		ax1.plot(xt_pred[delay:], xmean_pred[delay:], linewidth=2.0, color='#DC143C', linestyle='dashed', label='Prediction Mean')
-		ax1.fill_between(xt_pred[delay:], pred_l[delay:], pred_u[delay:], color='#DC143C', alpha=0.2, label='Prediction Std')
-		ax1.set_ylim([min(np.min(test_l),np.min(pred_l)),max(np.max(test_u),np.max(pred_u))])
-		# seperate line
-		ax1.plot(delay*Delta*np.ones(2), [min(np.min(test_l),np.min(pred_l))-10,max(np.max(test_u),np.max(pred_u))+10], linewidth=2.0, color='grey', alpha=1.0, linestyle=(0, (1, 1)))
-		ax1.set_ylim([min(np.min(test_l),np.min(pred_l)),max(np.max(test_u),np.max(pred_u))])
-		# ax1.set_ylim([-1.5,2.5])
-		# ax1.legend(prop={'size': 13})
-		# For MultiscaleNonlinOclator
-		ax1.legend(prop={'size': 9.3},bbox_to_anchor=(-0.025, 1.00, 1., .102), loc=3, ncol=3)
-		ax1.set_xlabel('$T$', {'size': 13})
-		ax1.set_ylabel(ylabels, {'size': 13})
-		if savepath is not None:
-			if name=='StochasticRes':
-				fig1.savefig(savepath, dpi=300)
-			else:
-				fig1.savefig(savepath, bbox_inches='tight')
-		return fig1,ax1
+		# Disabled in the public package.
+		pass
 
 	def plot_meanstd_SPDE_modal_fixtime(self,testdataMD,predictdataMD,dim,Delta,Resdata=None,slice=0,savepath=None):
 		# data should be in the form of dim*Ndata*test
@@ -759,89 +687,12 @@ class Evaluate():
 		return fig1,axes
 
 	def plot_meanqtl(self,name,testdata,predictdata,Delta,ylabels=None,Resdata=None,slice=0,savepath=None):
-		# data should be in the form of Ndata*test
-		if name=='Ex17PredPrey':
-			fig_size = [12,4]
-		elif name=='MultiscaleNonlinOclator':
-			fig_size = [5.4,3.5]
-		elif name=='SSAmRNAwDynk':
-			fig_size = [5.4,3.5]
-		else:
-			fig_size = [6,4]
-		# Test data
-		xt_test = np.arange(testdata.shape[-1])*Delta
-		xmean_test = np.mean(testdata,axis=0)
-		test_l     = np.quantile(testdata,0.25,axis=0)
-		test_u     = np.quantile(testdata,0.75,axis=0)
-		# Predict data
-		xt_pred = np.arange(predictdata.shape[-1])*Delta
-		xmean_pred = np.mean(predictdata,axis=0)
-		pred_l     = np.quantile(predictdata,0.25,axis=0)
-		pred_u     = np.quantile(predictdata,0.75,axis=0)
-		# plot
-		fig1, ax1 = plt.subplots(figsize=fig_size)
-		plt.rcParams['text.usetex'] = True
-		ax1.plot(xt_test, xmean_test, linewidth=2.0, color='#000080', label='Ground Truth Mean')
-		ax1.fill_between(xt_test, test_l, test_u, color='#000080', alpha=0.2, label='Ground Truth IQR')
-		ax1.plot(xt_pred, xmean_pred, linewidth=2.0, color='#DC143C', linestyle='dashed', label='Prediction Mean')
-		ax1.fill_between(xt_pred, pred_l, pred_u, color='#DC143C', alpha=0.2, label='Prediction IQR')
-		ax1.set_ylim([min(np.min(test_l),np.min(pred_l)),max(np.max(test_u),np.max(pred_u))])
-		# ax1.set_ylim([-1.5,2.5])
-		# ax1.legend(prop={'size': 13})
-		# For MultiscaleNonlinOclator
-		ax1.legend(prop={'size': 13},bbox_to_anchor=(-0.025, 1.00, 1., .102), loc=3, ncol=2)
-		ax1.set_xlabel('$T$', {'size': 13})
-		ax1.set_ylabel(ylabels, {'size': 13})
-		if savepath is not None:
-			if name=='StochasticRes':
-				fig1.savefig(savepath, dpi=300)
-			else:
-				fig1.savefig(savepath, bbox_inches='tight')
-		return fig1,ax1
+		# Disabled in the public package.
+		pass
 
 	def plot_mem_meanqtl(self,name,testdata,predictdata,Delta,delay,ylabels=None,Resdata=None,slice=0,savepath=None):
-		# data should be in the form of Ndata*test
-		if name=='Ex17PredPrey':
-			fig_size = [6,4]
-		else:
-			fig_size = [6,4]
-		# Test data
-		xt_test = np.arange(testdata.shape[-1])*Delta
-		xmean_test = np.mean(testdata,axis=0)
-		test_l     = np.quantile(testdata,0.25,axis=0)
-		test_u     = np.quantile(testdata,0.75,axis=0)
-		# Predict data
-		xt_pred = np.arange(predictdata.shape[-1])*Delta
-		xmean_pred = np.mean(predictdata,axis=0)
-		pred_l     = np.quantile(predictdata,0.25,axis=0)
-		pred_u     = np.quantile(predictdata,0.75,axis=0)
-		# plot
-		fig1, ax1 = plt.subplots(figsize=fig_size)
-		plt.rcParams['text.usetex'] = True
-		# observed memory
-		ax1.plot(xt_test[:delay+1], xmean_test[:delay+1], linewidth=2.0, color='grey', label='Observation Mean')
-		ax1.fill_between(xt_test[:delay+1], test_l[:delay+1], test_u[:delay+1], color='grey', alpha=0.35, label='Observation IQR')
-		# prediction
-		ax1.plot(xt_test[delay:], xmean_test[delay:], linewidth=2.0, color='#000080', label='Ground Truth Mean')
-		ax1.fill_between(xt_test[delay:], test_l[delay:], test_u[delay:], color='#000080', alpha=0.2, label='Ground Truth IQR')
-		ax1.plot(xt_pred[delay:], xmean_pred[delay:], linewidth=2.0, color='#DC143C', linestyle='dashed', label='Prediction Mean')
-		ax1.fill_between(xt_pred[delay:], pred_l[delay:], pred_u[delay:], color='#DC143C', alpha=0.2, label='Prediction IQR')
-		ax1.set_ylim([min(np.min(test_l),np.min(pred_l)),max(np.max(test_u),np.max(pred_u))])
-		# seperate line
-		ax1.plot(delay*Delta*np.ones(2), [min(np.min(test_l),np.min(pred_l))-10,max(np.max(test_u),np.max(pred_u))+10], linewidth=2.0, color='grey', alpha=1.0, linestyle=(0, (1, 1)))
-		ax1.set_ylim([min(np.min(test_l),np.min(pred_l)),max(np.max(test_u),np.max(pred_u))])
-		# ax1.set_ylim([-1.5,2.5])
-		# ax1.legend(prop={'size': 13})
-		# For MultiscaleNonlinOclator
-		ax1.legend(prop={'size': 9.3},bbox_to_anchor=(-0.025, 1.00, 1., .102), loc=3, ncol=3)
-		ax1.set_xlabel('$T$', {'size': 13})
-		ax1.set_ylabel(ylabels, {'size': 13})
-		if savepath is not None:
-			if name=='StochasticRes':
-				fig1.savefig(savepath, dpi=300)
-			else:
-				fig1.savefig(savepath, bbox_inches='tight')
-		return fig1,ax1
+		# Disabled in the public package.
+		pass
 
 	def plot_SPDE_modal_pdf(self,testdataMD,predictdataMD,dim,Delta,Resdata=None,slice=0,savepath=None):
 		# data should be in the form of dim*Ndata*test
@@ -2440,17 +2291,9 @@ class SdeNFEva(Evaluate):
 			if self.eqn_config.eqn_name in ['SSAmRNAwDynk','SSALV']:
 				save_ = (self.save_path+'/'+self.eqn_config.eqn_name+'_'+epoch+'sep_'+'M'+str(i+1)+'.pdf') if save else None
 				fig,ax = self.plot_meanstd_sep(self.eqn_config.eqn_name,test_data[i].T,pre_data[i].T,self.Delta,ylabels=ylabels[i],savepath=save_)
-			if self.eqn_config.eqn_name in ['REx2_3DOssilator','REx4_pendulum','REx7_YGO']:
-				if self.eqn_config.eqn_name=='REx2_3DOssilator':
-					delay_ = 50
-				elif self.eqn_config.eqn_name=='REx4_pendulum':
-					delay_ = 50
-				elif self.eqn_config.eqn_name=='REx7_YGO':
-					delay_ = 50
-				else:
-					delay_ = 1
-				save_ = (self.save_path+'/'+self.eqn_config.eqn_name+'_'+epoch+'mem_'+'M'+str(i+1)+'.pdf') if save else None
-				fig,ax = self.plot_mem_meanstd(self.eqn_config.eqn_name,test_data[i].T,pre_data[i].T,self.Delta,delay_,ylabels=ylabels[i],savepath=save_)
+			# Memory mean/std plots are disabled in the public package.
+			# if self.eqn_config.eqn_name in ['REx2_3DOssilator','REx4_pendulum','REx7_YGO']:
+			# 	...
 			plt.close()
 		if self.eqn_config.eqn_name in ['SHeatEqu_wSource_modal']:
 			save_ = (self.save_path+'/'+self.eqn_config.eqn_name+'_fixtime'+'.pdf') if save else None
@@ -2459,56 +2302,13 @@ class SdeNFEva(Evaluate):
 			fig,ax = self.plot_meanstd_SPDE_modal_fixpos(test_data,pre_data,self.dim,self.Delta,savepath=save_)
 			plt.close()
 
-	# def plot_meanqtlcompare(self,save=False,epoch=''):
-		# if self.eqn_config.eqn_name=='DisturbOU':
-			# ylabels = ['$x$']
-		# elif self.eqn_config.eqn_name=='SSALV':
-			# ylabels = ['$X_1$','$X_2$']
-		# elif self.eqn_config.eqn_name=='Ex19BiStochsticOU':
-			# ylabels = ['$x$']
-		# elif self.eqn_config.eqn_name=='Ex16Multiscale':
-			# ylabels = ['$x$','$y$']
-		# elif self.eqn_config.eqn_name=="Ex17PredPrey":
-			# ylabels = ['$x$','$y$']
-		# elif self.eqn_config.eqn_name=='SSAmRNAwDynk':
-			# ylabels = ['M','P']
-		# else:
-			# ylabels = [None for i in range(self.dim)]
+	def plot_meanqtlcompare(self,save=False,epoch=''):
+		# Disabled in the public package.
+		pass
 
-		# test_data = (sio.loadmat(self.test_data_path))['data']
-		# try:
-			# pre_data = (sio.loadmat(self.result_path+'/predict.mat'))['pred']
-		# except:
-			# raise AttributeError('ResnetEva::plot_single: Fail to find prediction data')
-		# plt.rcParams['text.usetex'] = True
-		# for i in range(min(self.dim,10)):
-			# save_ = (self.save_path+'/'+self.eqn_config.eqn_name+'_'+epoch+'MQ'+str(i+1)+'.pdf') if save else None
-			# pdb.set_trace()
-			# fig,ax = self.plot_meanqtl(self.eqn_config.eqn_name,test_data[i].T,pre_data[i].T,self.Delta,ylabels=ylabels[i],savepath=save_)
-			# fig,ax = self.plot_meanstdGeneralD(test_data[i].T,pre_data[i].T,self.Delta,savepath=save_)
-			# if self.eqn_config.eqn_name in ['REx2_3DOssilator','REx4_pendulum','REx7_YGO']:
-				# if self.eqn_config.eqn_name=='REx2_3DOssilator':
-					# delay_ = 50
-				# elif self.eqn_config.eqn_name=='REx4_pendulum':
-					# delay_ = 50
-				# elif self.eqn_config.eqn_name=='REx7_YGO':
-					# delay_ = 50
-				# else:
-					# delay_ = 1
-				# save_ = (self.save_path+'/'+self.eqn_config.eqn_name+'_'+epoch+'mem_'+'MQ'+str(i+1)+'.pdf') if save else None
-				# fig,ax = self.plot_mem_meanqtl(self.eqn_config.eqn_name,test_data[i].T,pre_data[i].T,self.Delta,delay_,ylabels=ylabels[i],savepath=save_)
-			# plt.close()
-
-	# def plotcompute_acf(self,save=False):
-		# test_data = (sio.loadmat(self.test_data_path))['data']
-		# try:
-			# pre_data = (sio.loadmat(self.result_path+'/predict.mat'))['pred']
-		# except:
-			# raise AttributeError('ResnetEva::plot_single: Fail to find prediction data')
-		# plt.rcParams['text.usetex'] = True
-		# for i in range(min(self.dim,10)):
-			# save_ = (self.save_path+'/'+self.eqn_config.eqn_name+'_'+'ACF'+str(i+1)+'.pdf') if save else None
-			# fig,ax = self.plot_acf(self.eqn_config.eqn_name,test_data[i].T,pre_data[i].T,self.Delta,savepath=save_)
+	def plotcompute_acf(self,save=False):
+		# Disabled in the public package.
+		pass
 
 	def plot_pdfcompare(self,save=False,epoch=''):
 		test_data = (sio.loadmat(self.test_data_path))['data']
