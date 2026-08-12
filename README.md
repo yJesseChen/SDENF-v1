@@ -125,15 +125,15 @@ These examples correspond to [3].
 | Example | Result folder | Description | `--model_name` |
 | --- | --- | --- | --- |
 | Ex22 | `results/Ex22` | Transfer process | `NFSDE_SSAconserve` |
-| Ex23 LV slow | `results/Ex23_LVSlow` | Slow Lotka-Volterra SSA model | `NFSDE` |
-| Ex23 LV fast | `results/Ex23_LVFast` | Fast Lotka-Volterra SSA model | `ResNFSDE` |
+| Ex23&nbsp;LV&nbsp;slow | `results/Ex23_LVSlow` | Slow Lotka-Volterra SSA model | `NFSDE` |
+| Ex23&nbsp;LV&nbsp;fast | `results/Ex23_LVFast` | Fast Lotka-Volterra SSA model | `ResNFSDE` |
 | Ex25 | `results/Ex25` | Brusselator | `NFSDE` |
 | Ex27 | `results/Ex27` | Autocatalysis | `ResNFSDE_SSAgenconserve` |
 | Ex26 | `results/Ex26` | Oregonator | `ResNFSDE` |
 | Ex45 | `results/Ex45` | Schlogl model | `MixNFSDE` |
 | Ex42 | `results/Ex42` | Vilar 2002 genetic oscillator model | `MixNFSDE_SSAgenconserve` |
 | Ex41 | `results/Ex41` | Mammalian circadian clock model | `MixNFSDE` |
-| Ex23 Mix | `results/Ex23_Mix` | Lotka-Volterra SSA model with mixed prior | `MixNFSDE` |
+| Ex23&nbsp;Mix | `results/Ex23_Mix` | Lotka-Volterra SSA model with mixed prior | `MixNFSDE` |
 
 ## Preparation
 
