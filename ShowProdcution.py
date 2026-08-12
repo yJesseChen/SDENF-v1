@@ -128,7 +128,7 @@ def main(argv):
 	
 	# Eva.plot_samplecompare(save=True)
 	# Eva.plot_fftompare(save=True)
-	Eva.plot_meancompare(save=True)
+	# Eva.plot_meancompare(save=True)
 	# Eva.plot_meanqtlcompare(save=True)
 	# Eva.plot_condpdfcompare(save=True)
 	# Eva.plot_stoppingtimecompare(save=True)

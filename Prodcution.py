@@ -812,6 +812,7 @@ class Evaluate():
 		xt_pred = np.arange(predictdata.shape[-1])*Delta
 		xmean_pred = np.mean(predictdata,axis=0)
 		# plot
+		idx = [j for j in idx if -testdata.shape[-1] <= j < testdata.shape[-1]]
 		for j in idx:
 			fig1, ax1 = plt.subplots(figsize=fig_size)
 			mt,st = np.mean(testdata[:,j-1]),np.std(testdata[:,j-1])
