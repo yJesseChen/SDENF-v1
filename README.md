@@ -12,6 +12,8 @@ The examples in this repository apply these models to three settings:
 - Markovian effective dynamics of multiscale SDEs;
 - stochastic simulation algorithm models for chemical reaction networks.
 
+The data-generation scripts for these examples are maintained in the companion repository [`SDEDATA-v1`](https://github.com/yJesseChen/SDEDATA-v1).
+
 A step-by-step tutorial for the Ex4 exponential-diffusion example is provided in [`tutorials/Ex4_tutorial.ipynb`](tutorials/Ex4_tutorial.ipynb). The tutorial walks through the task setup, data loading and plotting, config inspection, training, model outputs, prediction, and postprocessing.
 
 ## References
@@ -88,7 +90,7 @@ The main files are grouped by model type in the table below:
 
 The cleaned `results/` folder contains trained configs and weights for the following paper examples. We only provide configuration files and trained weights needed for reproduction; generated plots, logs, `predict.mat`, metrics folders, and production figure folders are not included by default.
 
-**Generated `.mat` data files are not included in this repository by default. Generate the required data with `SDEDATA-v1`, or place your own data files under the paths specified by `dat_config` in the corresponding config.**
+**Generated `.mat` data files are not included in this repository by default. Generate the required data with the companion data repository [`SDEDATA-v1`](https://github.com/yJesseChen/SDEDATA-v1), or place your own data files under the paths specified by `dat_config` in the corresponding config.**
 
 The `--model_name` column gives the model selector to pass to `ShowTest.py`, `ShowProdcution.py`, and the corresponding training script when reproducing that example.
 
