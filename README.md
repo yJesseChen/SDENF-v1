@@ -14,7 +14,7 @@ The examples in this repository apply these models to three settings:
 
 The data-generation scripts for these examples are maintained in the companion repository [`SDEDATA-v1`](https://github.com/yJesseChen/SDEDATA-v1).
 
-A step-by-step tutorial for the Ex4 exponential-diffusion example is provided in [`tutorials/Ex4_tutorial.ipynb`](tutorials/Ex4_tutorial.ipynb). The tutorial walks through the task setup, data loading and plotting, config inspection, training, model outputs, prediction, and postprocessing.
+A step-by-step tutorial for the Ex4 exponential-diffusion example is provided in [`tutorials/Ex4_tutorial.ipynb`](tutorials/Ex4_tutorial.ipynb). The tutorial walks through basic usage of the model.
 
 ## References
 
