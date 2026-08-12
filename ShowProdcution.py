@@ -144,7 +144,7 @@ def main(argv):
 	# except:
 	# 	warnings.warn("plot_losthist:: No hist plot generated.")
 
-	# Eva.Trail_condpdfcompare(np.array([    1,   1,   0,   0,   3,   1,   7, 774, 179]),'/Users/jesse/Desktop/a.mat',save=True)
+	# Trail conditional-PDF debugging is disabled in the public package.
 
 
 if __name__ == '__main__':

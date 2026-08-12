@@ -230,158 +230,16 @@ class Evaluate():
 				self.plot_singledata_gilispie_version_biaxis(np.arange(N_T)*Delta,testdata[:,:,index+i],colors=['#ADCAC9','#6F4D46'],labels=labels,save=savepath+'/TestSample_block_biaxis_grid_'+str(i+1)+'.pdf')
 
 	def plot_fft_block(self,name,predictdata,Delta,slice=0,savepath=None):
-		# data should be in the form of Ndata*test
-		if name=='SSATransfer':
-			Num = 9
-		elif name=="SSALV":
-			Num = 9
-			index = 18
-			data = sio.loadmat('/Users/jesse/Dropbox/SdeNF/data/ProdGllispiedata/Ex23SSALV_ori.mat')
-		elif name=="SSABrusselator":
-			Num = 9
-			index = 0
-			n_dom = 3
-			data = sio.loadmat('/Users/jesse/Dropbox/SdeNF/data/ProdGllispiedata/Ex25SSABrusselator_ori.mat')
-		elif name=='SSAOregonator':
-			Num = 9
-			index = 0
-			n_dom = 3
-			data = sio.loadmat('/Users/jesse/Dropbox/SdeNF/data/ProdGllispiedata/Ex26SSAOregonator_ori.mat')
-		elif name=='SSAautocatalytic':
-			Num = 9
-			index = 0
-			n_dom = 1
-			data = sio.loadmat('/Users/jesse/Dropbox/SdeNF/data/ProdGllispiedata/Ex27SSAautocatalytic_ori.mat')
-		elif name=="SSACIRC73s":
-			Num = 9
-			index = 0
-			n_dom = 1
-			data = sio.loadmat('/Users/jesse/Dropbox/SdeNF/data/ProdGllispiedata/Ex41SSACIRC73s_ori.mat')
-		elif name=="SSAVilar2002R":
-			Num = 9
-			index = 0
-			n_dom = 1
-			data = sio.loadmat('/Users/jesse/Dropbox/SdeNF/data/ProdGllispiedata/Ex42Vilar2002R_ori.mat')
-		else:
-			Num = 9
-			configs = {}
-			index = 0
-			n_dom = 1
-		
-		plt.rcParams['text.usetex'] = True
-		for i in range(Num):
-			fig2,ax2 = self.plot_fft(predictdata[-2,:,index+i],Delta,n_dom,'#004c99',save=savepath+'/Predfft'+str(i+1)+'.pdf')
-		for i in range(Num):
-			tint = np.linspace(0,(predictdata.shape[1]-1)*Delta,predictdata.shape[1])
-			test_data = self.interpolate_wrt_t(data['t_'+str(i)].flatten(),data['d_'+str(i)][:,-2],tint)
-			fig2,ax2 = self.plot_fft(test_data,Delta,n_dom,'#0c0d0d',save=savepath+'/Testfft'+str(i+1)+'.pdf')
+		# Disabled in the public package: original SSA/reference path plotting relied on local data files.
+		pass
 
 	def plot_glispie_ori(self,name,savepath=None):
-		# data should be in the form of Ndata*test
-
-		if name=='SSATransfer':
-			Num = 9
-		elif name=="SSALV":
-			Num = 9
-			configs = {'figsize':[4,4]}
-			index = 18
-			# data = sio.loadmat('/Users/jesse/Dropbox/SdeNF/data/ProdGllispiedata/Ex23SSALV_ori.mat')
-			data = sio.loadmat('/Users/jesse/Dropbox/SdeNF/data/ProdGllispiedata/Ex23SSALV_slow_ori.mat')
-		elif name=="SSABrusselator":
-			Num = 9
-			configs = {'figsize':[4,4]}
-			index = 0
-			data = sio.loadmat('/Users/jesse/Dropbox/SdeNF/data/ProdGllispiedata/Ex25SSABrusselator_ori.mat')
-		elif name=='SSAOregonator':
-			Num = 9
-			configs = {'view':[20,45],'scale':[0.7,0.7,1.4],'12_figsize':[2.2,4],'13_figsize':[1.8,4],'23_figsize':[2.8,4]}
-			index = 0
-			data = sio.loadmat('/Users/jesse/Dropbox/SdeNF/data/ProdGllispiedata/Ex26SSAOregonator_ori.mat')
-		elif name=='SSAautocatalytic':
-			Num = 9
-			configs = {'view':[20,45],'scale':[0.7,0.7,1.4]}
-			index = 0
-			data = sio.loadmat('/Users/jesse/Dropbox/SdeNF/data/ProdGllispiedata/Ex27SSAautocatalytic_ori.mat')
-		elif name=='SSAmRNAwDynk':
-			Num = 9
-			configs = {'figsize':[4,4]}
-			index = 0
-			data = sio.loadmat('/Users/jesse/Dropbox/SdeNF/data/Ex43SSAmRNAwDynk/Ex43SSAmRNAwDynk_T120_ori.mat')
-		else:
-			Num = 9
-			configs = {}
-			index = 0
-		
-		plt.rcParams['text.usetex'] = True
-		for i in range(Num):
-			fig2,ax2 = self.plot_singledata_multidim_tx_version(data['t_'+str(i)][0],data['d_'+str(i)].T,save=savepath+'/TestSample_block'+str(i+1)+'.pdf')
-		if self.eqn_config.dim==2:
-			for i in range(Num):
-				fig3,ax3 = self.plotsingledata2Dphase(data['d_'+str(i)][:,0],data['d_'+str(i)][:,1],"#0c0d0d",configs,save=savepath+'/TestPhase'+str(i+1)+'.pdf')
-		if self.eqn_config.dim==3:
-			for i in range(Num):
-				# fig3,ax3 = self.plotsingledata3Dphase(data['d_'+str(i)][:,0],data['d_'+str(i)][:,1],data['d_'+str(i)][:,2],"#0c0d0d",configs,save=savepath+'/TestPhase'+str(i+1)+'.pdf')
-				try:
-					self.plotsingledata3Dpairphase(data['d_'+str(i)][:,0],data['d_'+str(i)][:,1],data['d_'+str(i)][:,2],"#0c0d0d",configs,save=savepath+'/TestPhase'+str(i+1))
-				except:
-					pass
-		if name in []:
-			for i in range(Num):
-				self.plot_singledata_gilispie_version_biaxis(data['t_'+str(i)][0],data['d_'+str(i)].T,colors=['#ADCAC9','#6F4D46'],save=savepath+'/TestSample_block_biaxis_'+str(i+1)+'.pdf')
+		# Disabled in the public package: original SSA/Gillespie trajectory plots relied on local data files.
+		pass
 
 	def plot_multiscale_ori(self,name,savepath=None):
-		# data should be in the form of Ndata*test
-
-		if name=='Skew-Product SDE':
-			index = 0
-			Termi = 4
-			data = sio.loadmat('/Users/jesse/Dropbox/SdeNF/data/Ex28MultiScaleSkewProduct/Ex28MultiScaleSkewProduct_ori.mat')
-			legend_loc = 1
-			N_slow = 1
-		elif name=="Multiscale_Stochastic_exp":
-			index = 0
-			Termi = 4
-			data = sio.loadmat('/Users/jesse/Dropbox/SdeNF/data/Ex33MultiScaleExp/Ex33MultiScaleExp_ori.mat')
-			legend_loc = 4
-			N_slow = 1
-		elif name=="MultiScaleDuan3D":
-			index = 0
-			Termi = 8
-			data = sio.loadmat('/Users/jesse/Dropbox/SdeNF/data/Ex34MultiScaleDuan3D/Ex34MultiScaleDuan3D_T8_ori.mat')
-			legend_loc = 1
-			N_slow = 2
-		elif name=="MultiscaleNonlinOclator":
-			index = 0
-			Termi = 8
-			data = sio.loadmat('/Users/jesse/Dropbox/SdeNF/data/Ex36MultiscaleNonlinOclator/Ex36MultiscaleNonlinOclator_T20_ori.mat')
-			legend_loc = 1
-			N_slow = 2
-		elif name=="Ex38MultiscaleTriad":
-			index = 0
-			Termi = 5
-			data = sio.loadmat('/Users/jesse/Dropbox/SdeNF/data/Ex38MultiscaleTriad/Ex38MultiscaleTriad_ori.mat')
-			legend_loc = 1
-			N_slow = 1
-		else:
-			configs = {}
-			index = 0
-			legend_loc = 'upper center'
-			N_slow = 1
-		
-		data = data['data']
-		plt.rcParams['text.usetex'] = True
-		fig2,ax2 = self.plot_singledata_multidim_multiscale_version(np.linspace(0,Termi,data.shape[1]),data[:,:,index],save=savepath+'/Sample_full.pdf')
-		if name in ['Skew-Product SDE',"Multiscale_Stochastic_exp","MultiScaleDuan3D","MultiscaleNonlinOclator","Ex38MultiscaleTriad"]:
-			self.plot_singledata_multidim_multiscale_version_biaxis(np.linspace(0,Termi,data.shape[1]),data[:,:,index],N_slow=N_slow,legend_loc=legend_loc,save=savepath+'/Sample_full_biaxis.pdf')
-		# 	for i in range(Num):
-		# 		fig3,ax3 = self.plotsingledata2Dphase(data['d_'+str(i)][:,0],data['d_'+str(i)][:,1],"#0c0d0d",configs,save=savepath+'/TestPhase'+str(i+1)+'.pdf')
-		# if self.eqn_config.dim==3:
-		# 	for i in range(Num):
-		# 		# fig3,ax3 = self.plotsingledata3Dphase(data['d_'+str(i)][:,0],data['d_'+str(i)][:,1],data['d_'+str(i)][:,2],"#0c0d0d",configs,save=savepath+'/TestPhase'+str(i+1)+'.pdf')
-		# 		try:
-		# 			self.plotsingledata3Dpairphase(data['d_'+str(i)][:,0],data['d_'+str(i)][:,1],data['d_'+str(i)][:,2],"#0c0d0d",configs,save=savepath+'/TestPhase'+str(i+1))
-		# 		except:
-		# 			pass
+		# Disabled in the public package: original multiscale trajectory plots relied on local data files.
+		pass
 
 	def plot_sample_ens(self,name,testdata,predictdata,Delta,slice=0,savepath=None):
 		# data should be in the form of Ndata*test
@@ -1826,7 +1684,7 @@ class Evaluate():
 				# # axes.set_title("$X_s=$(%.1f,%.1f)"%(ini[0],ini[1]))
 				# axes.hist(np.array(dat_std).flatten(), bins=50, density=True, color='#000080',histtype='step', linewidth=1.3,label='Ground Truth')
 				# axes.hist(np.array(dat_mod).flatten(), bins=50, density=True, color='#DC143C',histtype='step',label='Prediction', ls='--', linewidth=1.3, alpha=0.8)
-				# sio.savemat('/Users/jesse/Desktop/a.mat',np.array(dat_mod).flatten())
+				# Debug-only local save disabled in the public package.
 				# axes.set_xlabel('Stopping Time')
 				# font2 = {'size'   : 14,}
 				# axes.legend(prop=font2)
@@ -2506,11 +2364,13 @@ class SdeNFEva(Evaluate):
 		if self.eqn_config.eqn_name in ['SSATransfer','SSALV']:
 			self.plot_sample_ens(self.eqn_config.eqn_name,test_data,pre_data,self.Delta,savepath=self.save_path)
 		
-		if self.eqn_config.eqn_name in ['SSALV','SSABrusselator','SSAOregonator','SSAautocatalytic']:
-			self.plot_glispie_ori(self.eqn_config.eqn_name,savepath=self.save_path)
+		# Original SSA/Gillespie path plots are disabled in the public package.
+		# if self.eqn_config.eqn_name in ['SSALV','SSABrusselator','SSAOregonator','SSAautocatalytic']:
+		# 	self.plot_glispie_ori(self.eqn_config.eqn_name,savepath=self.save_path)
 
-		if self.eqn_config.eqn_name in ["Skew-Product SDE","Multiscale_Stochastic_exp","MultiScaleDuan3D","MultiscaleNonlinOclator","Ex38MultiscaleTriad"]:
-			self.plot_multiscale_ori(self.eqn_config.eqn_name,savepath=self.save_path)
+		# Original multiscale path plots are disabled in the public package.
+		# if self.eqn_config.eqn_name in ["Skew-Product SDE","Multiscale_Stochastic_exp","MultiScaleDuan3D","MultiscaleNonlinOclator","Ex38MultiscaleTriad"]:
+		# 	self.plot_multiscale_ori(self.eqn_config.eqn_name,savepath=self.save_path)
 
 
 	def plot_fftompare(self,save=False):

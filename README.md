@@ -88,48 +88,52 @@ The main files are grouped by model type in the table below:
 
 The cleaned `results/` folder contains trained configs and weights for the following paper examples. We only provide configuration files and trained weights needed for reproduction; generated plots, logs, `predict.mat`, metrics folders, and production figure folders are not included by default.
 
+**Generated `.mat` data files are not included in this repository by default. Generate the required data with `SDEDATA-v1`, or place your own data files under the paths specified by `dat_config` in the corresponding config.**
+
+The `--model_name` column gives the model selector to pass to `ShowTest.py`, `ShowProdcution.py`, and the corresponding training script when reproducing that example.
+
 ### Nonautonomous and Controlled SDEs
 
 These examples correspond to [1].
 
-| Example | Result folder | Description | Model type |
+| Example | Result folder | Description | `--model_name` |
 | --- | --- | --- | --- |
-| Ex12 | `results/Ex12` | OU process with drift control | NFNonAuto |
-| Ex15 | `results/Ex15` | Stochastic resonance / double-well with excitation | NFNonAuto |
-| Ex16 | `results/Ex16` | Nonlinear SDE with control | NFNonAuto |
-| Ex17 | `results/Ex17` | Stochastic predator-prey model with excitation | NFNonAuto |
-| Ex19 | `results/Ex19` | OU process with both drift and diffusion control | NFNonAuto |
-| Ex43 | `results/Ex43` | Gene expression SSA model with time-dependent reaction rate | ResNFNonAuto |
-| SPDEEx3 | `results/SPDEEx3` | Stochastic heat equation with source, modal/spectral form | ResNFNonAuto |
+| Ex12 | `results/Ex12` | OU process with drift control | `NFNonAutoSDE` |
+| Ex15 | `results/Ex15` | Stochastic resonance / double-well with excitation | `NFNonAutoSDE` |
+| Ex16 | `results/Ex16` | Nonlinear SDE with control | `NFNonAutoSDE` |
+| Ex17 | `results/Ex17` | Stochastic predator-prey model with excitation | `NFNonAutoSDE` |
+| Ex19 | `results/Ex19` | OU process with both drift and diffusion control | `NFNonAutoSDE` |
+| Ex43 | `results/Ex43` | Gene expression SSA model with time-dependent reaction rate | `ResNFNonAutoSDE` |
+| SPDEEx3 | `results/SPDEEx3` | Stochastic heat equation with source, modal/spectral form | `ResNFNonAutoSDE` |
 
 ### Markovian Effective Dynamics of Multiscale SDEs
 
 These examples correspond to [2].
 
-| Example | Result folder | Description | Model type |
+| Example | Result folder | Description | `--model_name` |
 | --- | --- | --- | --- |
-| Ex28 | `results/Ex28` | Skew product SDE | NF |
-| Ex33 | `results/Ex33` | Exponential mean OU / multiscale exponential example | NF |
-| Ex38 | `results/Ex38` | Triad system | NF |
-| Ex34 | `results/Ex34` | 3D nonlinear multiscale SDE | NF |
-| Ex36 | `results/Ex36` | Multiscale stochastic oscillator | NF |
+| Ex28 | `results/Ex28` | Skew product SDE | `NFSDE` |
+| Ex33 | `results/Ex33` | Exponential mean OU / multiscale exponential example | `NFSDE` |
+| Ex38 | `results/Ex38` | Triad system | `NFSDE` |
+| Ex34 | `results/Ex34` | 3D nonlinear multiscale SDE | `NFSDE` |
+| Ex36 | `results/Ex36` | Multiscale stochastic oscillator | `NFSDE` |
 
 ### SSA / Chemical Reaction Networks
 
 These examples correspond to [3].
 
-| Example | Result folder | Description | Model type |
+| Example | Result folder | Description | `--model_name` |
 | --- | --- | --- | --- |
-| Ex22 | `results/Ex22` | Transfer process | Conservative NF |
-| Ex23 LV slow | `results/Ex23_LVSlow` | Slow Lotka-Volterra SSA model | NF |
-| Ex23 LV fast | `results/Ex23_LVFast` | Fast Lotka-Volterra SSA model | ResNF |
-| Ex25 | `results/Ex25` | Brusselator | NF |
-| Ex27 | `results/Ex27` | Autocatalysis | Conservative ResNF |
-| Ex26 | `results/Ex26` | Oregonator | ResNF |
-| Ex45 | `results/Ex45` | Schlogl model | MixNF |
-| Ex42 | `results/Ex42` | Vilar 2002 genetic oscillator model | Conservative MixNF |
-| Ex41 | `results/Ex41` | Mammalian circadian clock model | MixNF |
-| Ex23 Mix | `results/Ex23_Mix` | Lotka-Volterra SSA model with mixed prior | MixNF |
+| Ex22 | `results/Ex22` | Transfer process | `NFSDE_SSAconserve` |
+| Ex23 LV slow | `results/Ex23_LVSlow` | Slow Lotka-Volterra SSA model | `NFSDE` |
+| Ex23 LV fast | `results/Ex23_LVFast` | Fast Lotka-Volterra SSA model | `ResNFSDE` |
+| Ex25 | `results/Ex25` | Brusselator | `NFSDE` |
+| Ex27 | `results/Ex27` | Autocatalysis | `ResNFSDE_SSAgenconserve` |
+| Ex26 | `results/Ex26` | Oregonator | `ResNFSDE` |
+| Ex45 | `results/Ex45` | Schlogl model | `MixNFSDE` |
+| Ex42 | `results/Ex42` | Vilar 2002 genetic oscillator model | `MixNFSDE_SSAgenconserve` |
+| Ex41 | `results/Ex41` | Mammalian circadian clock model | `MixNFSDE` |
+| Ex23 Mix | `results/Ex23_Mix` | Lotka-Volterra SSA model with mixed prior | `MixNFSDE` |
 
 ## Preparation
 
@@ -411,3 +415,23 @@ results/<example>/Monitor/Best_model/
 ```
 
 `Monitor/Ens_model/` stores ensemble checkpoints when ensemble prediction was used. `Monitor/Best_model/` stores the best checkpoint when best-model monitoring was used. Generated plots, logs, `predict.mat`, metrics folders, and production figure folders are not included in the cleaned result package by default.
+
+## Minimal Reproduction Workflow
+
+For a saved example in `results/<example>/`, the usual reproduction workflow is:
+
+1. Generate or copy the required `.mat` data files into the paths specified by `results/<example>/Test_config.json`.
+2. Run prediction with the model selector shown in the `--model_name` column:
+
+```bash
+python ShowTest.py --test_name=<example> --model_name=<model_name> --test_case=<case_name>
+```
+
+3. Generate postprocessing or paper-style figures from the prediction output:
+
+```bash
+python ShowProdcution.py --test_name=<example> --model_name=<model_name> --test_case=<case_name>
+```
+
+Prediction and figure outputs are written under `results/<example>/<case_name>/` and are not tracked by git.
+
