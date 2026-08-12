@@ -989,21 +989,6 @@ class Evaluate():
 			fig1.savefig(save, bbox_inches='tight')
 		return fig1,ax1
 
-	# def plot_singledata_multidim(self,dataset,Tinterval,save=False):
-	# 	Nx = dataset.shape[-1]
-	# 	dim = dataset.shape[0]
-	# 	x = np.linspace(Tinterval[0],Tinterval[1],Nx)
-	# 	colors = ['#4169E1','#DC143C','#2cc990']
-	# 	fig1,ax1 = plt.subplots(figsize=(6,4))
-	# 	font2 = {'size'   : 14,}
-	# 	for i in range(dim):
-	# 		ax1.plot(x, dataset[i], color=colors[i], linewidth=1.3, label='$X_'+str(i+1)+'$')
-	# 	ax1.set_xlabel('$T$', font2)
-	# 	ax1.legend(prop=font2)
-	# 	if save:
-	# 		fig1.savefig(save, bbox_inches='tight')
-	# 	return fig1,ax1
-
 	def plot_singledata_multidim_tx_version(self,T,dataset,save=False):
 		dim = dataset.shape[0]
 		# colors = ['#0a0a0a','#9b9c9e','#6e6f70']
@@ -2098,20 +2083,6 @@ class Evaluate():
 		else:
 			print('The distribution %s is not supported'%(name))
 
-	# def condmv_plotting_data(self,model,x,N=5000):
-	# 	data = (model.predict(np.repeat(x,N)[:,None])).detach().numpy().flatten()
-	# 	try:
-	# 		data = (model.predict(np.repeat(x,N)[:,None])).detach().numpy().flatten()
-	# 	except:
-	# 		Nmodel = len(model)
-	# 		modelsep = np.linspace(0,N,Nmodel+1,dtype=int)
-	# 		data = np.zeros(N)
-	# 		for i in range(Nmodel):
-	# 			data[modelsep[i]:modelsep[i+1]] = (model[i].predict(np.repeat(x,modelsep[i+1]-modelsep[i])[:,None])).detach().numpy().flatten()
-	# 	# data = (model.predict(np.repeat(x,N)[:,None])).detach().numpy().flatten()
-	# 	m,s = np.mean(data),np.std(data)
-	# 	return m,s
-
 	def condmv_plotting_data2D(self,model,x,N=5000):
 		try:
 			data = (model.predict(np.tile(x,[N,1]))).detach().numpy()
@@ -2330,17 +2301,6 @@ class SdeNFEva(Evaluate):
 		if self.eqn_config.eqn_name in ['SHeatEqu_wSource_modal']:
 			save_ = (self.save_path+'/'+self.eqn_config.eqn_name+'_'+epoch+'_pdf.pdf') if save else None
 			self.plot_SPDE_modal_pdf(test_data,pre_data,self.dim,self.Delta,savepath=save_)
-
-	# def plot_meancompare_Resplus(self,save=False,epoch=''):
-	# 	test_data = (sio.loadmat(self.test_data_path))['data']
-	# 	Res_data = (sio.loadmat(self.eqn_config.Resdata['path']))['pred']
-	# 	try:
-	# 		pre_data = (sio.loadmat(self.result_path+'/predict.mat'))['pred']
-	# 	except:
-	# 		raise AttributeError('ResnetEva::plot_single: Fail to find prediction data')
-	# 	for i in range(min(self.dim,10)):
-	# 		save_ = (self.save_path+'/'+epoch+'M'+str(i+1)+'.pdf') if save else None
-	# 		fig,ax = self.plot_meanstd(test_data[i].T,pre_data[i].T,self.Delta,Resdata=Res_data[i],savepath=save_)
 
 	def plot_condpdfcompare(self,save=False):
 		# NFModel = self.readmodel(self.model_path,self.Mymodel.NFSSDE,self.config)

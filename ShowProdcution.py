@@ -128,7 +128,7 @@ def main(argv):
 	
 	# Eva.plot_samplecompare(save=True)
 	# Eva.plot_fftompare(save=True)
-	# Eva.plot_meancompare(save=True)
+	Eva.plot_meancompare(save=True)
 	# Eva.plot_meanqtlcompare(save=True)
 	# Eva.plot_condpdfcompare(save=True)
 	# Eva.plot_stoppingtimecompare(save=True)
@@ -137,14 +137,6 @@ def main(argv):
 	# Eva.plot_Enscompare(DatVes,ens_m_path,save=True)
 	# Eva.prediction_time()
 	# Eva.plotcompute_acf(save=True)
-	# try:
-	# 	if ('plot_losthist' in showcf.keys()) and (showcf.plot_losthist):
-	# 		Eva.plot_losthist(save=True)
-	# 		Eva.plot_Wdistance(save=True)
-	# except:
-	# 	warnings.warn("plot_losthist:: No hist plot generated.")
-
-	# Trail conditional-PDF debugging is disabled in the public package.
 
 
 if __name__ == '__main__':
